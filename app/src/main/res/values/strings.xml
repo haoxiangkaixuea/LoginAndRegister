@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">LoginAndRegister</string>
+    <string name="text_login">注册</string>
+    <string name="input_telephone">请输入手机号</string>
+    <string name="input_password">登录密码(6–20位字母、数字或字符)</string>
+    <string name="deal_front"><Data><font color="#FFA1A6B3">我已经阅读并同意 </font>
+        <font color="#477BEF">四川天府银行股份有限公司个人电子银行服务协议、四川天府银行股份有限公司隐私政策</font></Data></string>
+    <string name="btn_register">登录</string>
+    <string name="note">短信验证码激活</string>
+    <string name="more_register">更多登录</string>
+    <string name="release_number"> V2.0.0.1</string>
 </resources>
