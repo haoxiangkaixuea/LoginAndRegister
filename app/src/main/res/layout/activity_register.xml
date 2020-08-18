@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/input_telephone"
+        android:id="@+id/edit_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,7 +40,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edit_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_telephone" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_username" />
 
     <CheckBox
         android:id="@+id/cbEat"
@@ -68,7 +68,7 @@
         android:button="@null"
         android:padding="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
     <ScrollView
         android:id="@+id/scroll_text"
@@ -78,7 +78,7 @@
         android:layout_marginTop="39dp"
         android:padding="0dp"
         app:layout_constraintStart_toEndOf="@+id/cbEat"
-        app:layout_constraintTop_toBottomOf="@+id/editText2">
+        app:layout_constraintTop_toBottomOf="@+id/edit_password">
 
         <TextView
             android:id="@+id/deal_front"
@@ -103,7 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#DFE1E6"
+        android:background="@drawable/button_selector"
         android:stateListAnimator="@null"
         android:text="@string/btn_register"
         android:textColor="#FFFFFF"
@@ -141,15 +141,15 @@
         android:id="@+id/release_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="92dp"
+        android:layout_marginStart="183dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/release_number"
         android:textColor="#FFA1A6B3"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/more_register"
-        app:layout_constraintStart_toEndOf="@+id/note"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"

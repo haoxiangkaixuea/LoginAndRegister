@@ -11,10 +11,5 @@
                 android:top="0dp" />
         </shape>
     </item>
-<!--    <item android:state_pressed="true">-->
-<!--        <shape>-->
-<!--            <corners android:radius="4dp" />-->
-<!--            <solid android:color="#FFC730" />-->
-<!--        </shape>-->
-<!--    </item>-->
+
 </layer-list>
