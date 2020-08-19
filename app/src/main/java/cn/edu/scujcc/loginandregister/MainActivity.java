@@ -15,10 +15,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText et1 = (EditText) findViewById(R.id.et1);
-        ImageView bt = findViewById(R.id.imageView);
-
-        EditTextUtils.clearButtonListener(et1, bt);
-
     }
 }
