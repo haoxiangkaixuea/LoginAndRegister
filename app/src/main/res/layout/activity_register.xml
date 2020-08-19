@@ -19,45 +19,79 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_username"
+    <FrameLayout
+        android:id="@+id/frame_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="54dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/line_et_bg"
-        android:hint="@string/input_telephone"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:paddingTop="0dp"
-        android:paddingBottom="28dp"
-        android:textCursorDrawable="@drawable/bg_cursor"
-        android:textSize="16sp"
+        android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
-    </EditText>
+        <EditText
+            android:id="@+id/edit_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/line_et_bg"
+            android:hint="@string/input_telephone"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:layout_margin="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="28dp"
+            android:textCursorDrawable="@drawable/bg_cursor"
+            android:textSize="16sp"/>
 
-    <EditText
-        android:id="@+id/edit_password"
+        <ImageView
+            android:id="@+id/image_username"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|center_vertical"
+            app:srcCompat="@drawable/ic_baseline_clear_24" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/line_et_bg"
-        android:hint="@string/input_password"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword"
-        android:paddingTop="0dp"
-        android:paddingBottom="25dp"
-        android:textCursorDrawable="@drawable/bg_cursor"
-        android:textSize="16sp"
+        android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_username" />
+        app:layout_constraintTop_toBottomOf="@+id/frame_username">
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/line_et_bg"
+            android:hint="@string/input_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:paddingTop="0dp"
+            android:paddingBottom="25dp"
+            android:textCursorDrawable="@drawable/bg_cursor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/image_password"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|center_vertical"
+            app:srcCompat="@drawable/ic_baseline_clear_24" />
+    </FrameLayout>
 
     <CheckBox
         android:id="@+id/cbEat"
@@ -68,7 +102,7 @@
         android:button="@drawable/checkbox_img"
         android:padding="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+        app:layout_constraintTop_toBottomOf="@+id/frame_password" />
 
     <ScrollView
         android:id="@+id/scroll_text"
@@ -78,7 +112,7 @@
         android:layout_marginTop="39dp"
         android:padding="0dp"
         app:layout_constraintStart_toEndOf="@+id/cbEat"
-        app:layout_constraintTop_toBottomOf="@+id/edit_password">
+        app:layout_constraintTop_toBottomOf="@+id/frame_password">
 
         <TextView
             android:id="@+id/deal_front"
