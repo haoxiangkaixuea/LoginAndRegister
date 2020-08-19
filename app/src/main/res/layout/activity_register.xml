@@ -35,6 +35,7 @@
             android:id="@+id/edit_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="54dp"
             android:layout_marginEnd="16dp"
@@ -42,11 +43,10 @@
             android:hint="@string/input_telephone"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:layout_margin="0dp"
             android:paddingTop="0dp"
             android:paddingBottom="28dp"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/image_username"
@@ -94,7 +94,7 @@
     </FrameLayout>
 
     <CheckBox
-        android:id="@+id/cbEat"
+        android:id="@+id/cb_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -111,22 +111,22 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="39dp"
         android:padding="0dp"
-        app:layout_constraintStart_toEndOf="@+id/cbEat"
+        app:layout_constraintStart_toEndOf="@+id/cb_register"
         app:layout_constraintTop_toBottomOf="@+id/frame_password">
 
         <TextView
             android:id="@+id/deal_front"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_margin="0dp"
+            android:layout_marginStart="8dp"
             android:padding="0dp"
             android:text="@string/deal_front"
             android:textColor="#FFA1A6B3"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/cbEat"
+            app:layout_constraintStart_toEndOf="@+id/cb_register"
             tools:layout_editor_absoluteY="284dp" />
 
     </ScrollView>
@@ -198,7 +198,7 @@
         android:id="@+id/imageView3"
         android:layout_width="240dp"
         android:layout_height="80dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_close"

@@ -1,6 +1,7 @@
 package cn.edu.scujcc.loginandregister;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditTextUtils.clearButtonListener(editUsername, imageUsername);
         EditTextUtils.clearButtonListener(editPassword, imagePassword);
         btnSubmit = findViewById(R.id.btn_register);
-        checkBox = findViewById(R.id.cbEat);
+        checkBox = findViewById(R.id.cb_register);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -49,9 +50,11 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean signPassword = editPassword.getText().length() > 0;
                     if (signUsername & signPassword) {
                         btnSubmit.setBackgroundResource(R.drawable.btn_focus_on);
+                        btnSubmit.setTextColor(R.drawable.button_font_style);
                     }
                 } else {
                     btnSubmit.setBackgroundResource(R.drawable.btn_normal);
+                    btnSubmit.setTextColor(Color.WHITE);
                 }
             }
         });
