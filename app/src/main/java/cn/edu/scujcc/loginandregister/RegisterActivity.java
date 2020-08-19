@@ -2,7 +2,6 @@ package cn.edu.scujcc.loginandregister;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -56,11 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        imageClose.setOnClickListener(view ->{
-
+        imageClose.setOnClickListener(view -> {
             exit();
         });
-
         btnSubmit.setOnClickListener(v -> {
             Toast.makeText(RegisterActivity.this, "被点击了", Toast.LENGTH_SHORT).show();
         });
