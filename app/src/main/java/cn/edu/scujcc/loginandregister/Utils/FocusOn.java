@@ -1,21 +1,12 @@
-package cn.edu.scujcc.loginandregister;
+package cn.edu.scujcc.loginandregister.Utils;
 
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 /**
- * <pre>
- *     author : Administrator
- *     e-mail : xxx@xx
- *     time   : 2020/08/18
- *     desc   :
- *     version: 1.0
- * </pre>
- *
  * @author Administrator
  */
 public class FocusOn implements TextWatcher {
@@ -44,6 +35,7 @@ public class FocusOn implements TextWatcher {
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
     }
+
     @Override
     public void afterTextChanged(Editable editable) {
         if (TextUtils.isEmpty(editUsername.getText()) || TextUtils.isEmpty(editPassword.getText())) {

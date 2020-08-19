@@ -1,9 +1,12 @@
-package cn.edu.scujcc.loginandregister;
+package cn.edu.scujcc.loginandregister.Utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+
+import cn.edu.scujcc.loginandregister.R;
 
 /**
  * @author Administrator
@@ -12,11 +15,13 @@ public class SomeMonitorEditText implements TextWatcher {
 
     private Button button;
     private EditText[] text;
+    private CheckBox checkBox;
 
-    public void SetMonitorEditText(final Button button, final EditText... text) {
+    public void SetMonitorEditText(final Button button, final CheckBox checkBox, final EditText... text) {
 
         this.button = button;
         this.text = text;
+        this.checkBox=checkBox;
 
         for (int i = 0; i < text.length; i++) {
             if (text[i] != null) {
