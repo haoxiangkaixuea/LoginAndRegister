@@ -14,7 +14,9 @@ import cn.edu.scujcc.loginandregister.listener.EditTextChangeListener;
  */
 public class CheckEditUtils implements TextWatcher {
 
-    // 声明一个监听器
+    /**
+     * 声明一个监听器
+     */
     private EditTextChangeListener mListener;
 
     private Button btnSubmit;
@@ -25,7 +27,9 @@ public class CheckEditUtils implements TextWatcher {
         btnSubmit = submit;
     }
 
-    // 监听器的set方法
+    /**
+     * 监听器的set方法
+     */
     public void setListener(EditTextChangeListener listener) {
         mListener = listener;
     }
@@ -41,8 +45,8 @@ public class CheckEditUtils implements TextWatcher {
         // 因为此处没有对下标进行操作,所以遍历采用增强for循环
         for (EditText editText : mEditTexts) {
             if (TextUtils.isEmpty(editText.getText().toString())) {
-                // 如果是空的,那么直接返回true
                 return true;
+                // 如果是空的,那么直接返回true
             } else {
                 // 如果输入框中有内容,那么进行循环(检查下一个输入框中是否有内容)
                 // 当循环执行完毕后会return false;

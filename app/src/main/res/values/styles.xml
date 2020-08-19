@@ -5,14 +5,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
-    <style name="MainStyle" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="MainStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
     <style name="MyCheckbox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/comp_checkbox_normal</item>
         <item name="android:paddingLeft">10.0dip</item>
         <item name="android:height">35.0dip</item>
     </style>
-
 </resources>

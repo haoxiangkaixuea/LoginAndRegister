@@ -3,13 +3,11 @@ package cn.edu.scujcc.loginandregister;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import cn.edu.scujcc.loginandregister.Utils.CheckEditUtils;
-import cn.edu.scujcc.loginandregister.listener.EditTextChangeListener;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText editUsername;
@@ -26,21 +24,17 @@ public class RegisterActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.edit_password);
         btnSubmit = findViewById(R.id.btn_register);
         checkBox = findViewById(R.id.cbEat);
-
-        //1.创建工具类对象 设置监听空间
-        CheckEditUtils checkEditForButton = new CheckEditUtils(btnSubmit);
-        //2.把所有被监听的EditText设置进去
-        checkEditForButton.addEditText(editUsername, editPassword);
-        //3.根据接口回调的方法,分别进行操作
-        checkEditForButton.setListener(new EditTextChangeListener() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void allHasContent(boolean isHasContent) {
-                if (isHasContent) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (checkBox.isChecked()) {
+                    boolean signUsername = editUsername.getText().length() > 0;
+                    boolean signPassword = editPassword.getText().length() > 0;
+                    if (signUsername & signPassword) {
                         btnSubmit.setBackgroundResource(R.drawable.btn_focus_on);
-                    //btnSubmit.setTextColor(Color.parseColor("#FF148F"));
+                    }
                 } else {
                     btnSubmit.setBackgroundResource(R.drawable.btn_normal);
-                    //btnSubmit.setTextColor(Color.parseColor("#000000"));
                 }
             }
         });
