@@ -17,4 +17,5 @@
     <string name="deal_after"><Data><font color="#FFA1A6B3"> 已有账号，去</font>
         <font color="#477BEF">登录</font></Data></string>
     <string name="input_verify">请输入验证码</string>
+    <string name="again_send">s后重新发送</string>
 </resources>

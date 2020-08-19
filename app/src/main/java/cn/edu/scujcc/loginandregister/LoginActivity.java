@@ -80,12 +80,12 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void run() {
             times--;
-            tvGetVerity.setText(times + "s后重新发送");
+            tvGetVerity.setText(times + getResources().getString(R.string.again_send));
             if (times == 0) {
-                tvGetVerity.setText("重新发送");
+                tvGetVerity.setText(getResources().getString(R.string.get_verify));
                 times = 60;
                 tvGetVerity.setClickable(true);
-                tvGetVerity.setTextColor(Color.BLUE);
+                tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue));
             } else {
                 tvGetVerity.setClickable(false);
                 handler.postDelayed(runnable, 1000);
