@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,9 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="54dp"
-            android:layout_marginEnd="16dp"
             android:background="@drawable/line_et_bg"
             android:hint="@string/input_telephone"
             android:imeOptions="actionNext"
@@ -46,17 +43,22 @@
             android:paddingTop="0dp"
             android:paddingBottom="28dp"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image_username"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_edittext_clean" />
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,9 +75,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="27dp"
-            android:layout_marginEnd="16dp"
             android:background="@drawable/line_et_bg"
             android:hint="@string/input_password"
             android:imeOptions="actionNext"
@@ -83,15 +82,20 @@
             android:paddingTop="0dp"
             android:paddingBottom="25dp"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image_password"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
+            android:layout_marginBottom="27dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_edittext_clean" />
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <CheckBox
         android:id="@+id/cb_register"
