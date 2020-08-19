@@ -1,6 +1,6 @@
 package cn.edu.scujcc.loginandregister;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView imageTellPhone;
     private ImageView imageVerify;
     private ImageView imageBack;
-    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.cb_login);
         imageTellPhone = findViewById(R.id.image_tellPhone);
         imageVerify = findViewById(R.id.image_verify);
+        imageBack = findViewById(R.id.image_back);
+        imageBack.setOnClickListener(v -> {
+            Intent intentBack = new Intent(this, RegisterActivity.class);
+            startActivity(intentBack);
+        });
 
         EditTextUtils.clearButtonListener(editTellPhone, imageTellPhone);
         EditTextUtils.clearButtonListener(editVerify, imageVerify);

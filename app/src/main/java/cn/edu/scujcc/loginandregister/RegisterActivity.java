@@ -1,6 +1,7 @@
 package cn.edu.scujcc.loginandregister;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageUsername;
     private ImageView imagePassword;
     private ImageView imageClose;
+    private TextView tvLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
         imageUsername = findViewById(R.id.image_username);
         imagePassword = findViewById(R.id.image_password);
         imageClose = findViewById(R.id.image_close);
+        tvLogin = findViewById(R.id.text_login);
+        tvLogin.setOnClickListener(v -> {
+            Intent intentLogin = new Intent(this, LoginActivity.class);
+            startActivity(intentLogin);
+        });
 
         EditTextUtils.clearButtonListener(editUsername, imageUsername);
         EditTextUtils.clearButtonListener(editPassword, imagePassword);
@@ -65,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "被点击了", Toast.LENGTH_SHORT).show();
         });
     }
+
     public void exit() {
         for (Activity act : activityList) {
             act.finish();
