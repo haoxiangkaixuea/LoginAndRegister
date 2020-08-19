@@ -50,10 +50,10 @@
 
         <ImageView
             android:id="@+id/image_username"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
-            app:srcCompat="@drawable/ic_baseline_clear_24" />
+            app:srcCompat="@drawable/ic_edittext_clean" />
     </FrameLayout>
 
     <FrameLayout
@@ -87,10 +87,10 @@
 
         <ImageView
             android:id="@+id/image_password"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
-            app:srcCompat="@drawable/ic_baseline_clear_24" />
+            app:srcCompat="@drawable/ic_edittext_clean" />
     </FrameLayout>
 
     <CheckBox
@@ -119,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_margin="0dp"
             android:padding="0dp"
             android:text="@string/deal_front"
             android:textColor="#FFA1A6B3"

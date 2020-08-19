@@ -62,7 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "被点击了", Toast.LENGTH_SHORT).show();
         });
     }
-
     public void exit() {
         for (Activity act : activityList) {
             act.finish();
