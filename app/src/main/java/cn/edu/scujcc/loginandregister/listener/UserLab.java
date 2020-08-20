@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,21 +64,23 @@ public class UserLab {
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 boolean loginSuccess = false;
                 String result = "";
+                String code = "";
+                String tokenId = "";
                 if (response.body() != null) {
                     try {
                         loginSuccess = true;
                         result = response.body().string();
-                        JSONObject json = new JSONObject(content);
-                        //JSONObject codes = json.getJSONObject("code");
-                        String code = json.getString("code");
+                        JSONObject json = new JSONObject(result);
+                        code = json.getString("code");
+                        tokenId = json.getString("tokenId");
                         Log.d(TAG, "code" + code);
-
                         Log.d(TAG, "返回的数据为" + result);
+                        Log.d(TAG, "tokenId" + tokenId);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                if (loginSuccess) {
+                if (code == "00") {
                     Message msg = new Message();
                     msg.what = MSG_LOGIN_SUCCESS;
                     handler.sendMessage(msg);
