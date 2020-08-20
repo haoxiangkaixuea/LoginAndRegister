@@ -4,124 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
-    <ImageView
-        android:id="@+id/image_back"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_chevron_left_24" />
+    android:background="#FFFFFF"
+    tools:context=".activity.LoginActivity">
 
     <TextView
-        android:id="@+id/login_fast"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/login_fast"
-        android:textColor="#FF293040"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_back" />
-
-    <TextView
-        android:id="@+id/text_tell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/input_tell"
-        android:textColor="#FFA1A6B3"
-        app:layout_constraintStart_toStartOf="@+id/login_fast"
-        app:layout_constraintTop_toBottomOf="@+id/login_fast" />
+        android:id="@+id/text_login"
+        android:layout_width="32dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/text_login"
+        android:textColor="#FF477BEF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frame_tellPhone"
+        android:id="@+id/frame_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="54dp"
         android:layout_marginEnd="16dp"
         android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_tell">
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
         <EditText
-            android:id="@+id/edit_tellPhone"
+            android:id="@+id/edit_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:background="@drawable/line_et_bg"
             android:hint="@string/input_telephone"
             android:imeOptions="actionNext"
-            android:inputType="phone"
+            android:inputType="text"
             android:paddingTop="0dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="28dp"
             android:textCursorDrawable="@drawable/bg_cursor"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/image_tellPhone"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/get_verify"
-            app:layout_constraintEnd_toStartOf="@+id/get_verify"
-            app:layout_constraintTop_toTopOf="@+id/get_verify"
-            app:srcCompat="@drawable/ic_edittext_clean" />
-
-        <TextView
-            android:id="@+id/get_verify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="@string/get_verify"
-            android:textColor="#FF477BEF"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/edit_tellPhone"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/input_verify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="16dp"
-        android:padding="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_tellPhone">
-
-        <EditText
-            android:id="@+id/edit_verify"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:background="@drawable/line_et_bg"
-            android:hint="@string/input_verify"
-            android:imeOptions="actionNext"
-            android:inputType="phone"
-            android:paddingTop="0dp"
-            android:paddingBottom="20dp"
-            android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/image_verify"
+            android:id="@+id/image_username"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
@@ -131,8 +58,47 @@
             app:srcCompat="@drawable/ic_edittext_clean" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frame_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="16dp"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_username">
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@drawable/line_et_bg"
+            android:hint="@string/input_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:paddingTop="0dp"
+            android:paddingBottom="25dp"
+            android:textCursorDrawable="@drawable/bg_cursor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_password"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginBottom="27dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_edittext_clean" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <CheckBox
-        android:id="@+id/cb_login"
+        android:id="@+id/cb_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -140,7 +106,7 @@
         android:button="@drawable/checkbox_img"
         android:padding="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_verify" />
+        app:layout_constraintTop_toBottomOf="@+id/frame_password" />
 
     <ScrollView
         android:id="@+id/scroll_text"
@@ -149,8 +115,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="39dp"
         android:padding="0dp"
-        app:layout_constraintStart_toEndOf="@+id/cb_login"
-        app:layout_constraintTop_toBottomOf="@+id/input_verify">
+        app:layout_constraintStart_toEndOf="@+id/cb_register"
+        app:layout_constraintTop_toBottomOf="@+id/frame_password">
 
         <TextView
             android:id="@+id/deal_front"
@@ -170,7 +136,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
@@ -178,8 +144,8 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_selector"
         android:stateListAnimator="@null"
-        android:text="@string/button_next"
-        android:textColor="@drawable/button_font_normal"
+        android:text="@string/btn_register"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -187,14 +153,59 @@
         app:layout_constraintTop_toBottomOf="@+id/scroll_text" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/note"
+        android:textColor="#FFA1A6B3"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+    <TextView
+        android:id="@+id/more_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/more_register"
+        android:textColor="#FFA1A6B3"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+    <TextView
+        android:id="@+id/release_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/deal_after"
+        android:text="@string/release_number"
+        android:textColor="#FFA1A6B3"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/image_close"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mistake" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="45dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_close"
+        app:srcCompat="@drawable/welcome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

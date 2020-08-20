@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister;
+package cn.edu.scujcc.loginandregister.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,9 +13,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import cn.edu.scujcc.loginandregister.listener.EditTextUtils;
+import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         editTellPhone = findViewById(R.id.edit_tellPhone);
         tvGetVerity = findViewById(R.id.get_verify);
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         imageVerify = findViewById(R.id.image_verify);
         imageBack = findViewById(R.id.image_back);
         imageBack.setOnClickListener(v -> {
-            Intent intentBack = new Intent(this, RegisterActivity.class);
+            Intent intentBack = new Intent(this, LoginActivity.class);
             startActivity(intentBack);
         });
 
@@ -83,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             tvGetVerity.setText(times + getResources().getString(R.string.again_send));
             if (times == 0) {
                 tvGetVerity.setText(getResources().getString(R.string.get_verify));
-                times = 60;
                 tvGetVerity.setClickable(true);
                 tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue));
             } else {

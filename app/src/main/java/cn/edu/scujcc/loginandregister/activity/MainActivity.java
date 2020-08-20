@@ -1,12 +1,10 @@
-package cn.edu.scujcc.loginandregister;
+package cn.edu.scujcc.loginandregister.activity;
 
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import cn.edu.scujcc.loginandregister.listener.EditTextUtils;
+import cn.edu.scujcc.loginandregister.R;
 
 public class MainActivity extends AppCompatActivity {
 

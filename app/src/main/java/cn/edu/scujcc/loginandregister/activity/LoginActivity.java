@@ -1,9 +1,12 @@
-package cn.edu.scujcc.loginandregister;
+package cn.edu.scujcc.loginandregister.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -12,14 +15,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import cn.edu.scujcc.loginandregister.listener.EditTextUtils;
+import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
+import cn.edu.scujcc.loginandregister.listener.UserLab;
 
-public class RegisterActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     public static List<Activity> activityList = new LinkedList();
     private EditText editUsername;
     private EditText editPassword;
@@ -29,11 +35,44 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imagePassword;
     private ImageView imageClose;
     private TextView tvLogin;
+    private UserLab userLab = UserLab.getInstance();
+    private Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if (null != msg) {
+                switch (msg.what) {
+                    case UserLab.MSG_LOGIN_SUCCESS:
+                        loginSuccess();
+                        break;
+                    case UserLab.MSG_PASSWORD_ERROR:
+                        loginPasswordError();
+                        break;
+                    case UserLab.MSG_NETWORK_ERROR:
+                        loginNetworkError();
+                        break;
+                    default:
+                }
+            }
+
+        }
+    };
+
+    private void loginNetworkError() {
+        Toast.makeText(this, "网络错误", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loginPasswordError() {
+        Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loginSuccess() {
+        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
@@ -42,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
         imageClose = findViewById(R.id.image_close);
         tvLogin = findViewById(R.id.text_login);
         tvLogin.setOnClickListener(v -> {
-            Intent intentLogin = new Intent(this, LoginActivity.class);
+            Intent intentLogin = new Intent(this, RegisterActivity.class);
             startActivity(intentLogin);
         });
 
@@ -70,8 +109,12 @@ public class RegisterActivity extends AppCompatActivity {
             exit();
         });
         btnSubmit.setOnClickListener(v -> {
-            Toast.makeText(RegisterActivity.this, "被点击了", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LoginActivity.this, "被点击了", Toast.LENGTH_SHORT).show();
+            String userAccount = editUsername.getText().toString();
+            String password = editPassword.getText().toString();
+            userLab.login(userAccount, password, handler);
         });
+
     }
 
     public void exit() {
