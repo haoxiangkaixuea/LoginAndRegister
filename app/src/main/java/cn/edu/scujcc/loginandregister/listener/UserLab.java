@@ -74,7 +74,7 @@ public class UserLab {
                         String code = json.getString("code");
                         Log.d(TAG, "code" + code);
 
-                        Log.d(TAG, "返回的数据为" + content);
+                        Log.d(TAG, "返回的数据为" + result);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
@@ -98,20 +98,5 @@ public class UserLab {
                 handler.sendMessage(msg);
             }
         });
-    }
-
-    private void parseJson(String jsonData) {
-        try {
-            JSONArray root = new JSONArray(jsonData);
-            for (int i = 0; i < root.length(); i++) {
-                JSONObject jsonObject = root.getJSONObject(i);
-                String userAccount = jsonObject.getString("userAccount");
-                String password = jsonObject.getString("password");
-                Log.d(TAG, "userAccount" + userAccount);
-                Log.d(TAG, "password" + password);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
