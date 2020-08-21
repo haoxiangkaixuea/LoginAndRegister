@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -16,6 +17,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.test.espresso.core.internal.deps.guava.util.concurrent.ThreadFactoryBuilder;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
@@ -26,6 +34,10 @@ import cn.edu.scujcc.loginandregister.model.PostUser;
  * @author Administrator
  */
 public class RegisterActivity extends AppCompatActivity {
+    private static final int VERIFY_FAILURE = -5;
+    private static final int VERIFY_SUCCESS = 5;
+    private static final String TAG = "RegisterActivity";
+    public Intent verificationCode;
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
@@ -34,7 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageVerify;
     private ImageView imageBack;
     private TextView tvGetVerity;
-    private int times = 60;
+    private int startTime = 60;
+    private Boolean isRunning = true;
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -48,11 +61,21 @@ public class RegisterActivity extends AppCompatActivity {
                 case UserLab.MSG_NETWORK_ERROR:
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
                     break;
+                case VERIFY_FAILURE:
+                    handler.removeMessages(0);//停止
+                    tvGetVerity.setText(getResources().getString(R.string.get_verify));
+                    tvGetVerity.setEnabled(true);
+                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue));
+                    break;
+                case VERIFY_SUCCESS:
+                    handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
+                    String m = String.valueOf(msg.obj);
+                    editVerify.setText(m);
+                    break;
                 default:
             }
         }
     };
-    private MyRunnable runnable = new MyRunnable();
     private UserLab userLab = UserLab.getInstance();
 
     @Override
@@ -99,26 +122,40 @@ public class RegisterActivity extends AppCompatActivity {
             userLab.register(postUser, handler);
         });
         tvGetVerity.setOnClickListener(view -> {
-            times = 60;
-            handler.postDelayed(runnable, 1000);
+            handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
+            tvGetVerity.setText(startTime + getResources().getString(R.string.again_send));
             tvGetVerity.setTextColor(Color.GRAY);
+            tvGetVerity.setEnabled(false);
+            doWork();
         });
     }
 
-    //倒计时
-    class MyRunnable implements Runnable {
-        @Override
-        public void run() {
-            times--;
-            tvGetVerity.setText(times + getResources().getString(R.string.again_send));
-            if (times == 0) {
-                tvGetVerity.setText(getResources().getString(R.string.get_verify));
-                tvGetVerity.setClickable(true);
-                tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue));
-            } else {
-                tvGetVerity.setClickable(false);
-                handler.postDelayed(runnable, 1000);
-            }
+    public void doWork() {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("demo-pool-%d").build();
+        ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        singleThreadPool.execute(this::timerTaskThread);
+        singleThreadPool.shutdown();
+    }
+
+    private void timerTaskThread() {
+        Message msg = handler.obtainMessage();
+
+        startTime = 60;
+        startTime--;
+        handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
+        msg.arg1 = startTime;
+        Log.d(TAG,"startTime"+startTime);
+        if (startTime == 0) {
+            isRunning = false;
+            msg.what = VERIFY_FAILURE;
+        } else {
+            msg.what = VERIFY_SUCCESS;
+            Log.d(TAG, "msg.arg1" + msg.arg1);
         }
+        handler.sendMessage(msg);
     }
 }

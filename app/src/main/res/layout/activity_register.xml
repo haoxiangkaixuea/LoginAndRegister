@@ -112,7 +112,7 @@
             android:background="@drawable/line_et_bg"
             android:hint="@string/input_verify"
             android:imeOptions="actionNext"
-            android:inputType="phone"
+            android:inputType="number"
             android:paddingTop="0dp"
             android:paddingBottom="20dp"
             android:textCursorDrawable="@drawable/bg_cursor"

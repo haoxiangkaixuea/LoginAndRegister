@@ -73,9 +73,9 @@ public class UserLab {
                         code = json.getString("code");
                         Log.d(TAG, "返回的数据为" + result);
                         Log.d(TAG, "code" + code);
-                        String tokenId = json.getString("context");
-                        JSONObject jason = new JSONObject(tokenId);
-                        tokenId = jason.getString("tokenId");
+                        String context = json.getString("context");
+                        JSONObject jason = new JSONObject(context);
+                        String tokenId = jason.getString("tokenId");
                         Log.d(TAG, "tokenId" + tokenId);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -124,11 +124,16 @@ public class UserLab {
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
+                String verificationCode = "";
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
                         JSONObject json = new JSONObject(result);
                         code = json.getString("code");
+                        String context = json.getString("context");
+                        JSONObject jason = new JSONObject(context);
+                        verificationCode = jason.getString("verificationCode");
+                        Log.d(TAG, "verificationCode" + verificationCode);
                         Log.d(TAG, "返回的数据为" + result);
                         Log.d(TAG, "code" + code);
                     } catch (IOException | JSONException e) {
@@ -138,6 +143,9 @@ public class UserLab {
                 if ("00".equals(code)) {
                     Message msg = new Message();
                     msg.what = MSG_LOGIN_SUCCESS;
+                    //msg.obj=verificationCode;
+                    msg.obj = verificationCode;
+                    Log.d(TAG, "msg.obj" + msg.obj);
                     handler.sendMessage(msg);
                 } else {
                     Message msg = new Message();
