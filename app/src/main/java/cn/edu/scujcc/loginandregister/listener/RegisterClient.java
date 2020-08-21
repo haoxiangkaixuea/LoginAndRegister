@@ -5,14 +5,17 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
+/**
+ * @author Administrator
+ */
+public class RegisterClient {
     private static Retrofit INSTANCE = null;
 
     public static Retrofit getInstance() {
         if (INSTANCE == null) {
             //准备拦截器
             OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(new LoginInterceptor())
+                    .addInterceptor(new RegisterInterceptor())
                     .build();
 
             INSTANCE = new Retrofit.Builder()

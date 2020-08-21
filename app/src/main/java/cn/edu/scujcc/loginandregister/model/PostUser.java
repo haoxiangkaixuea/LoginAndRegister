@@ -1,20 +1,34 @@
 package cn.edu.scujcc.loginandregister.model;
 
 /**
- * <pre>
- *     author : Administrator
- *     e-mail : xxx@xx
- *     time   : 2020/08/20
- *     desc   :
- *     version: 1.0
  * </pre>
+ * @author Administrator
  */
 public class PostUser {
-    private String userAccount;
-    private String password;
+    private String tellPhone;
+    private String verity;
 
-    public PostUser(String userAccount, String password) {
-        this.userAccount = userAccount;
-        this.password = password;
+    @Override
+    public String toString() {
+        return "PostUser{" +
+                "tellPhone='" + tellPhone + '\'' +
+                ", verity='" + verity + '\'' +
+                '}';
+    }
+
+    public String getTellPhone() {
+        return tellPhone;
+    }
+
+    public void setTellPhone(String tellPhone) {
+        this.tellPhone = tellPhone;
+    }
+
+    public String getVerity() {
+        return verity;
+    }
+
+    public void setVerity(String verity) {
+        this.verity = verity;
     }
 }

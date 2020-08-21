@@ -2,6 +2,8 @@ package cn.edu.scujcc.loginandregister.model;
 
 /**
  * 请求返回
+ *
+ * @author Administrator
  */
 public class Response {
 

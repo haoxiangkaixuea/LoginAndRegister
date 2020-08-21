@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import cn.edu.scujcc.loginandregister.api.UserApi;
+import cn.edu.scujcc.loginandregister.model.PostUser;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -20,7 +21,6 @@ import retrofit2.Retrofit;
 /**
  * 获取网路请求
  */
-
 public class UserLab {
     public final static int MSG_NETWORK_ERROR = -2;
     public final static int MSG_LOGIN_SUCCESS = 1;
@@ -92,7 +92,61 @@ public class UserLab {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "登录失败" + t);
+                Log.d(TAG, "网络错误" + t);
+                Message msg = new Message();
+                msg.what = MSG_NETWORK_ERROR;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    public void register(PostUser postUser, Handler handler) {
+        Retrofit retrofit = RegisterClient.getInstance();
+        UserApi api = retrofit.create(UserApi.class);
+        String content = "";
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("userAccount", "15928132508");
+            jsonObject.put("type", "register");
+            jsonObject.put("clientVersion", "1.1.1.6");
+            jsonObject.put("imei", "347558749E29B240957C58DAA6277D48");
+            //json串转string类型
+            content = String.valueOf(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(JSON, content);
+        Call<ResponseBody> call = api.register(requestBody);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                String result = "";
+                String code = "";
+                if (response.body() != null) {
+                    try {
+                        result = response.body().string();
+                        JSONObject json = new JSONObject(result);
+                        code = json.getString("code");
+                        Log.d(TAG, "返回的数据为" + result);
+                        Log.d(TAG, "code" + code);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if ("00".equals(code)) {
+                    Message msg = new Message();
+                    msg.what = MSG_LOGIN_SUCCESS;
+                    handler.sendMessage(msg);
+                } else {
+                    Message msg = new Message();
+                    msg.what = MSG_PASSWORD_ERROR;
+                    handler.sendMessage(msg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d(TAG, "网络错误" + t);
                 Message msg = new Message();
                 msg.what = MSG_NETWORK_ERROR;
                 handler.sendMessage(msg);

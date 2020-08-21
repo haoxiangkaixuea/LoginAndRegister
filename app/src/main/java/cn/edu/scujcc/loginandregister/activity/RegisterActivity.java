@@ -4,17 +4,23 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
+import cn.edu.scujcc.loginandregister.listener.UserLab;
+import cn.edu.scujcc.loginandregister.model.PostUser;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText editTellPhone;
@@ -26,8 +32,25 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageBack;
     private TextView tvGetVerity;
     private int times = 60;
-    private Handler handler = new Handler();
+    private Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what) {
+                case UserLab.MSG_LOGIN_SUCCESS:
+                    Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_LONG).show();
+                    break;
+                case UserLab.MSG_PASSWORD_ERROR:
+                    Toast.makeText(RegisterActivity.this, "注册失败！", Toast.LENGTH_LONG).show();
+                    break;
+                case UserLab.MSG_NETWORK_ERROR:
+                    Toast.makeText(RegisterActivity.this, "网络错误！", Toast.LENGTH_LONG).show();
+                    break;
+                default:
+            }
+        }
+    };
     private MyRunnable runnable = new MyRunnable();
+    private UserLab userLab = UserLab.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +90,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         btnNext.setOnClickListener(v -> {
-
+            String tellPhone = editTellPhone.getText().toString();
+            String verify = editVerify.getText().toString();
+            PostUser postUser = null;
+            userLab.register(postUser, handler);
         });
         tvGetVerity.setOnClickListener(view -> {
             times = 60;

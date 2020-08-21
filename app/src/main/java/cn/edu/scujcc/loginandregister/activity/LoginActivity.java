@@ -109,12 +109,10 @@ public class LoginActivity extends AppCompatActivity {
             exit();
         });
         btnSubmit.setOnClickListener(v -> {
-            //Toast.makeText(LoginActivity.this, "被点击了", Toast.LENGTH_SHORT).show();
             String userAccount = editUsername.getText().toString();
             String password = editPassword.getText().toString();
             userLab.login(userAccount, password, handler);
         });
-
     }
 
     public void exit() {
