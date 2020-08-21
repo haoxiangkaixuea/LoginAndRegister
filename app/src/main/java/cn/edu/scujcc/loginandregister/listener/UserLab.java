@@ -27,7 +27,6 @@ public class UserLab {
     public final static int MSG_PASSWORD_ERROR = -1;
     private static final String TAG = "UserLab";
     private static UserLab INSTANCE;
-    String content = "";
     private MediaType JSON = MediaType.get("application/json;charset=utf-8");
 
     private UserLab() {
@@ -43,7 +42,7 @@ public class UserLab {
     public void login(String userAccount, String password, Handler handler) {
         Retrofit retrofit = RetrofitClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
-
+        String content = "";
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("userAccount", "15928132503");
@@ -62,25 +61,25 @@ public class UserLab {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                boolean loginSuccess = false;
                 String result = "";
                 String code = "";
-                String tokenId = "";
+                // String tokenId = "";
                 if (response.body() != null) {
                     try {
-                        loginSuccess = true;
                         result = response.body().string();
                         JSONObject json = new JSONObject(result);
                         code = json.getString("code");
-                        tokenId = json.getString("tokenId");
-                        Log.d(TAG, "code" + code);
                         Log.d(TAG, "返回的数据为" + result);
+                        Log.d(TAG, "code" + code);
+                        String tokenId = json.getString("context");
+                        JSONObject jason = new JSONObject(tokenId);
+                        tokenId = jason.getString("tokenId");
                         Log.d(TAG, "tokenId" + tokenId);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                if (code == "00") {
+                if ("00".equals(code)) {
                     Message msg = new Message();
                     msg.what = MSG_LOGIN_SUCCESS;
                     handler.sendMessage(msg);
