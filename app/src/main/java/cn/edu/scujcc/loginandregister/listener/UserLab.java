@@ -20,6 +20,8 @@ import retrofit2.Retrofit;
 
 /**
  * 获取网路请求
+ *
+ * @author Administrator
  */
 public class UserLab {
     public final static int MSG_NETWORK_ERROR = -2;

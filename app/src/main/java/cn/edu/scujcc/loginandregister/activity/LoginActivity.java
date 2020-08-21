@@ -25,6 +25,9 @@ import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
 import cn.edu.scujcc.loginandregister.listener.UserLab;
 
+/**
+ * @author Administrator
+ */
 public class LoginActivity extends AppCompatActivity {
     public static List<Activity> activityList = new LinkedList();
     private EditText editUsername;
@@ -39,34 +42,31 @@ public class LoginActivity extends AppCompatActivity {
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
-            if (null != msg) {
-                switch (msg.what) {
-                    case UserLab.MSG_LOGIN_SUCCESS:
-                        loginSuccess();
-                        break;
-                    case UserLab.MSG_PASSWORD_ERROR:
-                        loginPasswordError();
-                        break;
-                    case UserLab.MSG_NETWORK_ERROR:
-                        loginNetworkError();
-                        break;
-                    default:
-                }
+            switch (msg.what) {
+                case UserLab.MSG_LOGIN_SUCCESS:
+                    loginSuccess();
+                    break;
+                case UserLab.MSG_PASSWORD_ERROR:
+                    loginPasswordError();
+                    break;
+                case UserLab.MSG_NETWORK_ERROR:
+                    loginNetworkError();
+                    break;
+                default:
             }
-
         }
     };
 
     private void loginNetworkError() {
-        Toast.makeText(this, "网络错误", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
     }
 
     private void loginPasswordError() {
-        Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
     }
 
     private void loginSuccess() {
-        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
     }
 
     @Override

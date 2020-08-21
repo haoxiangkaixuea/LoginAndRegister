@@ -22,6 +22,9 @@ import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
 import cn.edu.scujcc.loginandregister.listener.UserLab;
 import cn.edu.scujcc.loginandregister.model.PostUser;
 
+/**
+ * @author Administrator
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText editTellPhone;
     private EditText editVerify;
@@ -37,13 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case UserLab.MSG_LOGIN_SUCCESS:
-                    Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
                     break;
                 case UserLab.MSG_PASSWORD_ERROR:
-                    Toast.makeText(RegisterActivity.this, "注册失败！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
                     break;
                 case UserLab.MSG_NETWORK_ERROR:
-                    Toast.makeText(RegisterActivity.this, "网络错误！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
                     break;
                 default:
             }

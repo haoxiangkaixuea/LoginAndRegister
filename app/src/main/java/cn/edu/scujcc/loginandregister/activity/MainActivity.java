@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
 
+/**
+ * @author Administrator
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
