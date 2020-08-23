@@ -8,6 +8,7 @@ import okhttp3.Response;
 
 /**
  * </pre> 添加header 请求头
+ *
  * @author Administrator
  */
 public class LoginInterceptor implements Interceptor {
@@ -16,7 +17,6 @@ public class LoginInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         Request request = builder
                 .addHeader("imei", "347558749E29B240957C58DAA6277D48")
-                .addHeader("appversion","1.1.1.6")
                 .build();
         return chain.proceed(request);
     }

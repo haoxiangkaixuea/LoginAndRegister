@@ -43,7 +43,7 @@ public class UserLab {
     }
 
     public void login(LoginUser loginUser, Handler handler) {
-        Retrofit retrofit = RetrofitClient.getInstance();
+        Retrofit retrofit = RetrofitClient.getLoginInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = "";
         try {
@@ -104,7 +104,7 @@ public class UserLab {
     }
 
     public void register(RegisterUser postUser, Handler handler) {
-        Retrofit retrofit = RegisterClient.getInstance();
+        Retrofit retrofit = RetrofitClient.getRegisterInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = "";
         try {
