@@ -124,7 +124,7 @@ public class UserLab {
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
-                String verificationCode = "";
+                int verificationCode = 0;
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
@@ -132,7 +132,7 @@ public class UserLab {
                         code = json.getString("code");
                         String context = json.getString("context");
                         JSONObject jason = new JSONObject(context);
-                        verificationCode = jason.getString("verificationCode");
+                        verificationCode = jason.getInt("verificationCode");
                         Log.d(TAG, "verificationCode" + verificationCode);
                         Log.d(TAG, "返回的数据为" + result);
                         Log.d(TAG, "code" + code);
@@ -143,8 +143,7 @@ public class UserLab {
                 if ("00".equals(code)) {
                     Message msg = new Message();
                     msg.what = MSG_LOGIN_SUCCESS;
-                    //msg.obj=verificationCode;
-                    msg.obj = verificationCode;
+                    msg.arg1 = verificationCode;
                     Log.d(TAG, "msg.obj" + msg.obj);
                     handler.sendMessage(msg);
                 } else {

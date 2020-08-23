@@ -7,6 +7,9 @@ import android.text.Selection;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 
+/**
+ * @author Administrator
+ */
 public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText {
     public MobileEditText(Context context) {
         super(context);

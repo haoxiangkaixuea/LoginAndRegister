@@ -55,20 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
                 case UserLab.MSG_NETWORK_ERROR:
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
                     break;
-//                case VERIFY_FAILURE:
-//                    //停止
-//                    handler.removeMessages(0);
-//                    tvGetVerity.setText(getResources().getString(R.string.get_verify));
-//                    tvGetVerity.setEnabled(true);
-//                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
-//                    tvGetVerity.setTextColor(R.drawable.ed_after_verify);
-//                    break;
-//                case VERIFY_SUCCESS:
-//                    // handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
-//                    String m = String.valueOf(msg.obj);
-//                    handler.postDelayed((Runnable) handler, 1000);
-//                    editVerify.setText(m);
-//                    break;
+                case VERIFY_SUCCESS:
+                    editVerify.setText(msg.arg1);
+                    break;
                 default:
             }
         }
@@ -145,37 +134,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-//    public void doWork() {
-//        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-//                .setNameFormat("demo-pool-%d").build();
-//        ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
-//                0L, TimeUnit.MILLISECONDS,
-//                new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
-//
-//        singleThreadPool.execute(this::timerTaskThread);
-//        singleThreadPool.shutdown();
-//    }
-//
-//    private void timerTaskThread() {
-//        Message msg = handler.obtainMessage();
-//        startTime--;
-//        handler.postDelayed((Runnable) handler, 1000);
-//        // handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
-//        msg.arg1 = startTime;
-//        Log.d(TAG, "startTime" + startTime);
-//        if (startTime == 0) {
-//            isRunning = false;
-//            msg.what = VERIFY_FAILURE;
-//        } else {
-//            msg.what = VERIFY_SUCCESS;
-//            Log.d(TAG, "msg.arg1" + msg.arg1);
-//        }
-//        handler.sendMessage(msg);
-//    }
-
     /**
      * 获取验证码倒计时
-     * Created on 2019/7/4.
      */
     public class CountDownTimerUtils extends CountDownTimer {
         private TextView mTextView;
@@ -187,19 +147,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            //设置不可点击
+            Message msg = new Message();
+            msg.what = VERIFY_SUCCESS;
+            handler.sendMessage(msg);
             mTextView.setClickable(false);
-            mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));  //设置倒计时时间
+            //设置倒计时时间
+            mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));
             mTextView.setTextColor(Color.GRAY);
-            //设置按钮为灰色，这时是不能点击的
         }
 
         @Override
         public void onFinish() {
             mTextView.setText(getResources().getString(R.string.get_verify));
-            //重新获得点击
             mTextView.setClickable(true);
-            //还原背景色
             mTextView.setTextColor(getResources().getColor(R.color.colorBlue, null));
         }
     }
