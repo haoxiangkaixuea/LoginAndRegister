@@ -3,10 +3,12 @@ package cn.edu.scujcc.loginandregister.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -17,18 +19,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.test.espresso.core.internal.deps.guava.util.concurrent.ThreadFactoryBuilder;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
 import cn.edu.scujcc.loginandregister.listener.UserLab;
-import cn.edu.scujcc.loginandregister.model.PostUser;
 
 /**
  * @author Administrator
@@ -61,17 +55,20 @@ public class RegisterActivity extends AppCompatActivity {
                 case UserLab.MSG_NETWORK_ERROR:
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
                     break;
-                case VERIFY_FAILURE:
-                    handler.removeMessages(0);//停止
-                    tvGetVerity.setText(getResources().getString(R.string.get_verify));
-                    tvGetVerity.setEnabled(true);
-                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue));
-                    break;
-                case VERIFY_SUCCESS:
-                    handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
-                    String m = String.valueOf(msg.obj);
-                    editVerify.setText(m);
-                    break;
+//                case VERIFY_FAILURE:
+//                    //停止
+//                    handler.removeMessages(0);
+//                    tvGetVerity.setText(getResources().getString(R.string.get_verify));
+//                    tvGetVerity.setEnabled(true);
+//                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
+//                    tvGetVerity.setTextColor(R.drawable.ed_after_verify);
+//                    break;
+//                case VERIFY_SUCCESS:
+//                    // handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
+//                    String m = String.valueOf(msg.obj);
+//                    handler.postDelayed((Runnable) handler, 1000);
+//                    editVerify.setText(m);
+//                    break;
                 default:
             }
         }
@@ -115,47 +112,95 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        editTellPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
+                tvGetVerity.setEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null && s.length() == 11) {
+                    tvGetVerity.setEnabled(true);
+                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
+                } else {
+                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
+                    tvGetVerity.setEnabled(false);
+                }
+            }
+        });
+
         btnNext.setOnClickListener(v -> {
-            String tellPhone = editTellPhone.getText().toString();
-            String verify = editVerify.getText().toString();
-            PostUser postUser = null;
-            userLab.register(postUser, handler);
+            userLab.register(null, handler);
         });
         tvGetVerity.setOnClickListener(view -> {
-            handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
-            tvGetVerity.setText(startTime + getResources().getString(R.string.again_send));
-            tvGetVerity.setTextColor(Color.GRAY);
-            tvGetVerity.setEnabled(false);
-            doWork();
+            CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
+            mCountDownTimerUtils.start();
         });
     }
 
-    public void doWork() {
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("demo-pool-%d").build();
-        ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+//    public void doWork() {
+//        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+//                .setNameFormat("demo-pool-%d").build();
+//        ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
+//                0L, TimeUnit.MILLISECONDS,
+//                new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+//
+//        singleThreadPool.execute(this::timerTaskThread);
+//        singleThreadPool.shutdown();
+//    }
+//
+//    private void timerTaskThread() {
+//        Message msg = handler.obtainMessage();
+//        startTime--;
+//        handler.postDelayed((Runnable) handler, 1000);
+//        // handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
+//        msg.arg1 = startTime;
+//        Log.d(TAG, "startTime" + startTime);
+//        if (startTime == 0) {
+//            isRunning = false;
+//            msg.what = VERIFY_FAILURE;
+//        } else {
+//            msg.what = VERIFY_SUCCESS;
+//            Log.d(TAG, "msg.arg1" + msg.arg1);
+//        }
+//        handler.sendMessage(msg);
+//    }
 
-        singleThreadPool.execute(this::timerTaskThread);
-        singleThreadPool.shutdown();
-    }
+    /**
+     * 获取验证码倒计时
+     * Created on 2019/7/4.
+     */
+    public class CountDownTimerUtils extends CountDownTimer {
+        private TextView mTextView;
 
-    private void timerTaskThread() {
-        Message msg = handler.obtainMessage();
-
-        startTime = 60;
-        startTime--;
-        handler.sendMessageDelayed(Message.obtain(handler, 0), 1000);
-        msg.arg1 = startTime;
-        Log.d(TAG,"startTime"+startTime);
-        if (startTime == 0) {
-            isRunning = false;
-            msg.what = VERIFY_FAILURE;
-        } else {
-            msg.what = VERIFY_SUCCESS;
-            Log.d(TAG, "msg.arg1" + msg.arg1);
+        public CountDownTimerUtils(TextView textView, long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            this.mTextView = textView;
         }
-        handler.sendMessage(msg);
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            //设置不可点击
+            mTextView.setClickable(false);
+            mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));  //设置倒计时时间
+            mTextView.setTextColor(Color.GRAY);
+            //设置按钮为灰色，这时是不能点击的
+        }
+
+        @Override
+        public void onFinish() {
+            mTextView.setText(getResources().getString(R.string.get_verify));
+            //重新获得点击
+            mTextView.setClickable(true);
+            //还原背景色
+            mTextView.setTextColor(getResources().getColor(R.color.colorBlue, null));
+        }
     }
 }
