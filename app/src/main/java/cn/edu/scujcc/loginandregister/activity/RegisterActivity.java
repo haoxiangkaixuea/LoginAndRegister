@@ -28,10 +28,8 @@ import cn.edu.scujcc.loginandregister.listener.UserLab;
  * @author Administrator
  */
 public class RegisterActivity extends AppCompatActivity {
-    private static final int VERIFY_FAILURE = -5;
     private static final int VERIFY_SUCCESS = 5;
     private static final String TAG = "RegisterActivity";
-    public Intent verificationCode;
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;

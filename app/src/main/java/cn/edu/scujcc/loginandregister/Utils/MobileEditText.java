@@ -73,16 +73,16 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
                     }
                 }
                 index = 0;
-                int konggeNumberC = 0;
+                int keggedNumberC = 0;
                 while (index < buffer.length()) {
                     if ((index == 3 || index == 8)) {
                         buffer.insert(index, ' ');
-                        konggeNumberC++;
+                        keggedNumberC++;
                     }
                     index++;
                 }
-                if (konggeNumberC > keggedNumberB) {
-                    location += (konggeNumberC - keggedNumberB);
+                if (keggedNumberC > keggedNumberB) {
+                    location += (keggedNumberC - keggedNumberB);
                 }
                 tempChar = new char[buffer.length()];
                 buffer.getChars(0, buffer.length(), tempChar, 0);
