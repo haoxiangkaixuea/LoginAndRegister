@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.activity;
+package cn.edu.scujcc.loginandregister.view;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
 import cn.edu.scujcc.loginandregister.Utils.SmsTimeUtils;
-import cn.edu.scujcc.loginandregister.listener.UserLab;
+import cn.edu.scujcc.loginandregister.presenter.UserLab;
 
 /**
  * @author Administrator

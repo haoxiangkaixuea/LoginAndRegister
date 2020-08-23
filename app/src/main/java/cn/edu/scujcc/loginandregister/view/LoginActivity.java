@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.activity;
+package cn.edu.scujcc.loginandregister.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
-import cn.edu.scujcc.loginandregister.listener.UserLab;
+import cn.edu.scujcc.loginandregister.presenter.UserLab;
 
 /**
  * @author Administrator
