@@ -32,7 +32,7 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
         int onTextLength = 0;
         boolean isChanged = false;
         int location = 0;// 记录光标的位置
-        int konggeNumberB = 0;
+        int keggedNumberB = 0;
         private char[] tempChar;
 
         @Override
@@ -41,10 +41,10 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
             if (buffer.length() > 0) {
                 buffer.delete(0, buffer.length());
             }
-            konggeNumberB = 0;
+            keggedNumberB = 0;
             for (int i = 0; i < s.length(); i++) {
                 if (s.charAt(i) == ' ') {
-                    konggeNumberB++;
+                    keggedNumberB++;
                 }
             }
         }
@@ -81,8 +81,8 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
                     }
                     index++;
                 }
-                if (konggeNumberC > konggeNumberB) {
-                    location += (konggeNumberC - konggeNumberB);
+                if (konggeNumberC > keggedNumberB) {
+                    location += (konggeNumberC - keggedNumberB);
                 }
                 tempChar = new char[buffer.length()];
                 buffer.getChars(0, buffer.length(), tempChar, 0);

@@ -40,8 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageVerify;
     private ImageView imageBack;
     private TextView tvGetVerity;
-    private int startTime = 60;
-    private Boolean isRunning = true;
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
