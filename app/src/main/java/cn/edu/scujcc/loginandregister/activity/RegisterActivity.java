@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
+import cn.edu.scujcc.loginandregister.Utils.SmsTimeUtils;
 import cn.edu.scujcc.loginandregister.listener.UserLab;
 
 /**
@@ -52,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
                     break;
                 case VERIFY_SUCCESS:
-                    editVerify.setText(msg.arg1);
+                    //editVerify.setText(msg.arg1);
                     break;
                 default:
             }
@@ -127,6 +128,9 @@ public class RegisterActivity extends AppCompatActivity {
         tvGetVerity.setOnClickListener(view -> {
             CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
             mCountDownTimerUtils.start();
+            if (SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, true)) {
+                SmsTimeUtils.startCountdown(tvGetVerity);
+            }
         });
     }
 
@@ -150,6 +154,8 @@ public class RegisterActivity extends AppCompatActivity {
             //设置倒计时时间
             mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));
             mTextView.setTextColor(Color.GRAY);
+            SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, false);
+            SmsTimeUtils.startCountdown(tvGetVerity);
         }
 
         @Override
