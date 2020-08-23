@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.view;
+package cn.edu.scujcc.loginandregister.activity;
 
 import android.os.Bundle;
 
