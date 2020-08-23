@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(v -> {
             String userAccount = editUsername.getText().toString();
             String password = editPassword.getText().toString();
-            userLab.login(userAccount, password, handler);
+            userLab.login(null, handler);
         });
     }
 

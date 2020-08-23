@@ -10,7 +10,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import cn.edu.scujcc.loginandregister.api.UserApi;
-import cn.edu.scujcc.loginandregister.model.PostUser;
+import cn.edu.scujcc.loginandregister.model.LoginUser;
+import cn.edu.scujcc.loginandregister.model.RegisterUser;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -41,7 +42,7 @@ public class UserLab {
         return INSTANCE;
     }
 
-    public void login(String userAccount, String password, Handler handler) {
+    public void login(LoginUser loginUser, Handler handler) {
         Retrofit retrofit = RetrofitClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = "";
@@ -102,7 +103,7 @@ public class UserLab {
         });
     }
 
-    public void register(PostUser postUser, Handler handler) {
+    public void register(RegisterUser postUser, Handler handler) {
         Retrofit retrofit = RegisterClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = "";

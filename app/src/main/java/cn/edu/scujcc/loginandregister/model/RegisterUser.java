@@ -4,7 +4,7 @@ package cn.edu.scujcc.loginandregister.model;
  * </pre>
  * @author Administrator
  */
-public class PostUser {
+public class RegisterUser {
     private String tellPhone;
     private String verity;
 
