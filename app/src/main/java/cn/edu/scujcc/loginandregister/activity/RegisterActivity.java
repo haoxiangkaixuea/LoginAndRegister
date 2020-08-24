@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (checkBox.isChecked()) {
                     boolean signUsername = editTellPhone.getText().length() > 0;
                     boolean signPassword = editVerify.getText().length() > 0;
-                    if (signUsername & signPassword) {
+                    if (signUsername && signPassword) {
                         btnNext.setBackgroundResource(R.drawable.btn_focus_on);
                         btnNext.setTextColor(R.drawable.button_font_style);
                     }
