@@ -1,5 +1,6 @@
 package cn.edu.scujcc.loginandregister.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -162,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
-            if (tellPhone){
+            if (tellPhone) {
                 Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
                 userLab.register(null, handler);
                 CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
@@ -187,6 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
             this.mTextView = textView;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
             mTextView.setClickable(false);

@@ -1,7 +1,6 @@
 package cn.edu.scujcc.loginandregister.model;
 
 /**
- * </pre>
  * @author Administrator
  */
 public class RegisterUser {

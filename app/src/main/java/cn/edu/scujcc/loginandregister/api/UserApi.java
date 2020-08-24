@@ -7,8 +7,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 /**
- * </pre>
- *
  * @author Administrator
  */
 public interface UserApi {

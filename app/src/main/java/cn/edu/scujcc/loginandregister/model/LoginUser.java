@@ -1,13 +1,6 @@
 package cn.edu.scujcc.loginandregister.model;
 
 /**
- * <pre>
- *     author : Administrator
- *     e-mail : xxx@xx
- *     time   : 2020/08/23
- *     desc   :
- *     version: 1.0
- * </pre>
  * @author Administrator
  */
 public class LoginUser {

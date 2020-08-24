@@ -73,12 +73,9 @@ public class UserLab {
                         result = response.body().string();
                         JSONObject json = new JSONObject(result);
                         code = json.getString("code");
-                        Log.d(TAG, "返回的数据为" + result);
-                        Log.d(TAG, "code" + code);
                         String context = json.getString("context");
                         JSONObject jason = new JSONObject(context);
                         tokenId = jason.getString("tokenId");
-                        Log.d(TAG, "tokenId" + tokenId);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
@@ -135,9 +132,6 @@ public class UserLab {
                         String context = json.getString("context");
                         JSONObject jason = new JSONObject(context);
                         verificationCode = jason.getInt("verificationCode");
-                        Log.d(TAG, "verificationCode" + verificationCode);
-                        Log.d(TAG, "返回的数据为" + result);
-                        Log.d(TAG, "code" + code);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
@@ -146,7 +140,6 @@ public class UserLab {
                     Message msg = new Message();
                     msg.what = MSG_REGISTER_SUCCESS;
                     msg.arg1 = verificationCode;
-                    Log.d(TAG, "msg.arg1" + msg.arg1);
                     handler.sendMessage(msg);
                 } else {
                     Message msg = new Message();

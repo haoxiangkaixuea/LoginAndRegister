@@ -13,12 +13,8 @@ import static android.content.ContentValues.TAG;
 
 /**
  * 发送验证码倒计时工具类
- * http://blog.csdn.net/qq_16965811
- * Created by ypt on 2017/12/22.
- * 用法
- * if (SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, true)) {
- * SmsTimeUtils.startCountdown(tvGetVerity);
- * }
+ *
+ * @author Administrator
  */
 public class SmsTimeUtils {
     /*设置提现账户  标识
@@ -41,7 +37,12 @@ public class SmsTimeUtils {
     /*提现*/
     private static long WITHDRAW_CASH_END = 0;
 
-
+    /**
+     * 用法
+     * if (SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, true)) {
+     * SmsTimeUtils.startCountdown(tvGetVerity);
+     * }
+     */
     private static Timer countdownTimer;
     private static TextView tvSendCode;
     private static Handler handler = new Handler(Looper.getMainLooper()) {
@@ -65,7 +66,6 @@ public class SmsTimeUtils {
     /**
      * 检查是否超过60秒
      * 给当前要从多少开始倒数赋值
-     * http://blog.csdn.net/qq_16965811
      *
      * @param type  1，设置提现账户 2，注册3，忘记密码
      * @param first true 表示第一次   false不是
@@ -109,7 +109,6 @@ public class SmsTimeUtils {
 
     /**
      * 开始倒计时
-     * http://blog.csdn.net/qq_16965811
      *
      * @param textView 控制倒计时的view
      */

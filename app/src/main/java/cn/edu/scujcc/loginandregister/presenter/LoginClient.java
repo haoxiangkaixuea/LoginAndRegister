@@ -11,13 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginClient {
     private static Retrofit INSTANCE = null;
 
-    //    public static Retrofit getLoginInstance() {
-//        return getInstance(getLoginClient());
-//    }
-//
-//    public static Retrofit getRegisterInstance() {
-//        return getInstance(getRegisterClient());
-//    }
     public static Retrofit getInstance() {
         if (INSTANCE == null) {
             //准备拦截器
@@ -34,19 +27,5 @@ public class LoginClient {
         }
         return INSTANCE;
     }
-//
-//    private static OkHttpClient getRegisterClient() {
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .addInterceptor(new RegisterInterceptor())
-//                .build();
-//        return client;
-//    }
-//
-//    private static OkHttpClient getLoginClient() {
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .addInterceptor(new LoginInterceptor())
-//                .build();
-//        return client;
-//    }
 }
 
