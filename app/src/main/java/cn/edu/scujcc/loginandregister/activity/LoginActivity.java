@@ -57,16 +57,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-    private void loginNetworkError() {
-        Toast.makeText(this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+    private void loginSuccess() {
+        Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
     }
-
+    
     private void loginPasswordError() {
         Toast.makeText(this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
     }
 
-    private void loginSuccess() {
-        Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+    private void loginNetworkError() {
+        Toast.makeText(this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
