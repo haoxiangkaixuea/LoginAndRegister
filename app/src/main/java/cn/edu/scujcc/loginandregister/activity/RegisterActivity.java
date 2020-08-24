@@ -147,19 +147,16 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
                 tvGetVerity.setEnabled(false);
-                tvGetVerity.setClickable(false);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 if (s != null && s.length() == 11) {
                     tvGetVerity.setEnabled(true);
-                    tvGetVerity.setClickable(true);
                     tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
                 } else {
                     tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
                     tvGetVerity.setEnabled(false);
-                    tvGetVerity.setClickable(false);
                 }
             }
         });
@@ -168,10 +165,13 @@ public class RegisterActivity extends AppCompatActivity {
             registerSuccess();
         });
         tvGetVerity.setOnClickListener(view -> {
-            userLab.register(null, handler);
-            Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
-            CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
-            mCountDownTimerUtils.start();
+            boolean tellPhone = editTellPhone.getText().length() == 11;
+            if (tellPhone){
+                Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
+                userLab.register(null, handler);
+                CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
+                mCountDownTimerUtils.start();
+            }
         });
     }
 
@@ -196,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity {
             mTextView.setClickable(false);
             //设置倒计时时间
             mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));
-            mTextView.setTextColor(Color.GRAY);
+            mTextView.setTextColor(getResources().getColor(R.color.colorGray, null));
             SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, false);
             SmsTimeUtils.startCountdown(tvGetVerity);
         }
