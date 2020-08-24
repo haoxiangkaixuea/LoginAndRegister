@@ -8,8 +8,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -33,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String ACTION = "cn.edu.scujcc.loginandregister.activity";
     private static final int VERIFY_SUCCESS = 5;
     private static final String TAG = "RegisterActivity";
+    final SpannableStringBuilder style = new SpannableStringBuilder();
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
@@ -91,6 +97,21 @@ public class RegisterActivity extends AppCompatActivity {
         imageVerify = findViewById(R.id.image_verify);
         imageBack = findViewById(R.id.image_back);
         tvGoLogin = findViewById(R.id.text_go_login);
+        //设置文字
+        style.append(getResources().getString(R.string.deal_after));
+        //设置部分文字点击事件
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        };
+        style.setSpan(clickableSpan, 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvGoLogin.setText(style);
+        //配置给TextView
+        tvGoLogin.setMovementMethod(LinkMovementMethod.getInstance());
+        tvGoLogin.setText(style);
 
         imageBack.setOnClickListener(v -> {
             Intent intentBack = new Intent(this, LoginActivity.class);
