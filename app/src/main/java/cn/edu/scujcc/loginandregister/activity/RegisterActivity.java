@@ -38,7 +38,7 @@ import cn.edu.scujcc.loginandregister.presenter.UserLab;
 public class RegisterActivity extends AppCompatActivity {
     private static final int TELL_MAX = 11;
     private static final String TAG = "RegisterActivity";
-    final SpannableStringBuilder style = new SpannableStringBuilder();
+    private final SpannableStringBuilder style = new SpannableStringBuilder();
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
