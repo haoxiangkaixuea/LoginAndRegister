@@ -35,8 +35,7 @@ import cn.edu.scujcc.loginandregister.presenter.UserLab;
  * @author Administrator
  */
 public class RegisterActivity extends AppCompatActivity {
-    public static final String ACTION = "cn.edu.scujcc.loginandregister.activity";
-    private static final int VERIFY_SUCCESS = 5;
+    private static final int TELL_MAX = 11;
     private static final String TAG = "RegisterActivity";
     final SpannableStringBuilder style = new SpannableStringBuilder();
     private EditText editTellPhone;
@@ -149,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s != null && s.length() == 11) {
+                if (s != null && s.length() == TELL_MAX) {
                     tvGetVerity.setEnabled(true);
                     tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
                 } else {
@@ -162,7 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
             registerSuccess();
         });
         tvGetVerity.setOnClickListener(view -> {
-            boolean tellPhone = editTellPhone.getText().length() == 11;
+            boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone){
                 Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
                 userLab.register(null, handler);
