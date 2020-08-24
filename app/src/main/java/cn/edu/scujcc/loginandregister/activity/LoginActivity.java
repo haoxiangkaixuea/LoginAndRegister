@@ -109,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
             exit();
         });
         btnSubmit.setOnClickListener(v -> {
-            String userAccount = editUsername.getText().toString();
-            String password = editPassword.getText().toString();
             userLab.login(null, handler);
         });
     }
