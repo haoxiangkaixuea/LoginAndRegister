@@ -14,10 +14,10 @@ import okhttp3.Response;
 public class LoginInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Request.Builder builder = chain.request().newBuilder();
-        Request request = builder
+        Request originalRequest = chain.request();
+        Request authorised = originalRequest.newBuilder()
                 .addHeader("imei", "347558749E29B240957C58DAA6277D48")
                 .build();
-        return chain.proceed(request);
+        return chain.proceed(authorised);
     }
 }

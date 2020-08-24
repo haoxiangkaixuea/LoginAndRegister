@@ -15,9 +15,12 @@ import static android.content.ContentValues.TAG;
  * 发送验证码倒计时工具类
  * http://blog.csdn.net/qq_16965811
  * Created by ypt on 2017/12/22.
+ * 用法
+ * if (SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, true)) {
+ * SmsTimeUtils.startCountdown(tvGetVerity);
+ * }
  */
 public class SmsTimeUtils {
-
     /*设置提现账户  标识
       发送验证码*/
     public final static int SETTING_FINANCE_ACCOUNT_TIME = 1;

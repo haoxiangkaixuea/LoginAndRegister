@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -39,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageVerify;
     private ImageView imageBack;
     private TextView tvGetVerity;
+    private TextView tvGoLogin;
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -53,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
                     break;
                 case VERIFY_SUCCESS:
+                    Log.d(TAG, "msg.arg1" + msg.arg1);
                     //editVerify.setText(msg.arg1);
                     break;
                 default:
@@ -74,6 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
         imageTellPhone = findViewById(R.id.image_tellPhone);
         imageVerify = findViewById(R.id.image_verify);
         imageBack = findViewById(R.id.image_back);
+        tvGoLogin = findViewById(R.id.text_go_login);
+
         imageBack.setOnClickListener(v -> {
             Intent intentBack = new Intent(this, LoginActivity.class);
             startActivity(intentBack);
@@ -126,11 +131,12 @@ public class RegisterActivity extends AppCompatActivity {
             userLab.register(null, handler);
         });
         tvGetVerity.setOnClickListener(view -> {
+            Message msg = new Message();
+            msg.what = VERIFY_SUCCESS;
+            handler.sendMessage(msg);
             CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
             mCountDownTimerUtils.start();
-            if (SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, true)) {
-                SmsTimeUtils.startCountdown(tvGetVerity);
-            }
+
         });
     }
 
@@ -147,9 +153,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            Message msg = new Message();
-            msg.what = VERIFY_SUCCESS;
-            handler.sendMessage(msg);
             mTextView.setClickable(false);
             //设置倒计时时间
             mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));

@@ -14,14 +14,12 @@ import retrofit2.http.POST;
 public interface UserApi {
     /**
      * @param requestBody 登录请求体
-     * @return null
      */
-    @POST("/mcloudbank/user/login/pwdLogin")
+    @POST("mcloudbank/user/login/pwdLogin")
     Call<ResponseBody> login(@Body RequestBody requestBody);
 
     /**
      * @param requestBody 注册请求体
-     * @return null
      */
     @POST("mcloudbank/user/verificationCode/sendVerificationCode")
     Call<ResponseBody> register(@Body RequestBody requestBody);

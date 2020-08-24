@@ -43,7 +43,7 @@ public class UserLab {
     }
 
     public void login(LoginUser loginUser, Handler handler) {
-        Retrofit retrofit = RetrofitClient.getLoginInstance();
+        Retrofit retrofit = LoginClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = "";
         try {
@@ -66,7 +66,7 @@ public class UserLab {
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
-                // String tokenId = "";
+                String tokenId = "";
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
@@ -76,7 +76,7 @@ public class UserLab {
                         Log.d(TAG, "code" + code);
                         String context = json.getString("context");
                         JSONObject jason = new JSONObject(context);
-                        String tokenId = jason.getString("tokenId");
+                        tokenId = jason.getString("tokenId");
                         Log.d(TAG, "tokenId" + tokenId);
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -104,7 +104,7 @@ public class UserLab {
     }
 
     public void register(RegisterUser postUser, Handler handler) {
-        Retrofit retrofit = RetrofitClient.getRegisterInstance();
+        Retrofit retrofit = RegisterClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = "";
         try {
@@ -145,7 +145,7 @@ public class UserLab {
                     Message msg = new Message();
                     msg.what = MSG_LOGIN_SUCCESS;
                     msg.arg1 = verificationCode;
-                    Log.d(TAG, "msg.obj" + msg.obj);
+                    Log.d(TAG, "msg.arg1" + msg.arg1);
                     handler.sendMessage(msg);
                 } else {
                     Message msg = new Message();
