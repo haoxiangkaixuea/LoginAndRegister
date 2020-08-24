@@ -30,6 +30,7 @@ import cn.edu.scujcc.loginandregister.presenter.UserLab;
  * @author Administrator
  */
 public class RegisterActivity extends AppCompatActivity {
+    public static final String ACTION = "cn.edu.scujcc.loginandregister.activity";
     private static final int VERIFY_SUCCESS = 5;
     private static final String TAG = "RegisterActivity";
     private EditText editTellPhone;
@@ -41,28 +42,40 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageBack;
     private TextView tvGetVerity;
     private TextView tvGoLogin;
+    private String showVerify;
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
+            Log.d(TAG, "msg.arg1" + msg.arg1);
             switch (msg.what) {
-                case UserLab.MSG_LOGIN_SUCCESS:
-                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+                case UserLab.MSG_REGISTER_SUCCESS:
+                    showVerify = String.valueOf(msg.arg1);
+                    editVerify.setText(showVerify);
                     break;
                 case UserLab.MSG_PASSWORD_ERROR:
-                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
+                    registerPasswordError();
                     break;
                 case UserLab.MSG_NETWORK_ERROR:
-                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
-                    break;
-                case VERIFY_SUCCESS:
-                    Log.d(TAG, "msg.arg1" + msg.arg1);
-                    //editVerify.setText(msg.arg1);
+                    registerNetworkError();
                     break;
                 default:
+                    break;
             }
         }
     };
     private UserLab userLab = UserLab.getInstance();
+
+    private void registerSuccess() {
+        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+    }
+
+    private void registerPasswordError() {
+        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
+    }
+
+    private void registerNetworkError() {
+        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,31 +126,37 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
                 tvGetVerity.setEnabled(false);
+                tvGetVerity.setClickable(false);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 if (s != null && s.length() == 11) {
                     tvGetVerity.setEnabled(true);
+                    tvGetVerity.setClickable(true);
                     tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
                 } else {
                     tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
                     tvGetVerity.setEnabled(false);
+                    tvGetVerity.setClickable(false);
                 }
             }
         });
 
         btnNext.setOnClickListener(v -> {
-            userLab.register(null, handler);
+            registerSuccess();
         });
         tvGetVerity.setOnClickListener(view -> {
-            Message msg = new Message();
-            msg.what = VERIFY_SUCCESS;
-            handler.sendMessage(msg);
+            userLab.register(null, handler);
+            Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
             CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
             mCountDownTimerUtils.start();
-
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     /**

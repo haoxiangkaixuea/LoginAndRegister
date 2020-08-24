@@ -28,6 +28,7 @@ public class UserLab {
     public final static int MSG_NETWORK_ERROR = -2;
     public final static int MSG_LOGIN_SUCCESS = 1;
     public final static int MSG_PASSWORD_ERROR = -1;
+    public static final int MSG_REGISTER_SUCCESS = 2;
     private static final String TAG = "UserLab";
     private static UserLab INSTANCE;
     private MediaType JSON = MediaType.get("application/json;charset=utf-8");
@@ -143,7 +144,7 @@ public class UserLab {
                 }
                 if ("00".equals(code)) {
                     Message msg = new Message();
-                    msg.what = MSG_LOGIN_SUCCESS;
+                    msg.what = MSG_REGISTER_SUCCESS;
                     msg.arg1 = verificationCode;
                     Log.d(TAG, "msg.arg1" + msg.arg1);
                     handler.sendMessage(msg);

@@ -3,8 +3,10 @@
     <string name="text_login">注册</string>
     <string name="input_telephone">请输入手机号</string>
     <string name="input_password">登录密码(6–20位字母、数字或字符)</string>
-    <string name="deal_front"><Data><font color="#FFA1A6B3">我已经阅读并同意 </font>
-        <font color="#477BEF">四川天府银行股份有限公司个人电子银行服务协议、四川天府银行股份有限公司隐私政策</font></Data></string>
+    <string name="deal_front"><Data><font color="#FFA1A6B3">我已经阅读并同意</font>
+        <font color="#477BEF">《四川天府银行股份有限公司个人电子银行服务协议》
+            <font color="#FFA1A6B3">、</font>
+            《四川天府银行股份有限公司隐私政策》</font></Data></string>
     <string name="btn_register">登录</string>
     <string name="note">短信验证码激活</string>
     <string name="more_register">更多登录</string>
@@ -19,10 +21,11 @@
         <font color="#477BEF">登录</font></Data></string>
     <string name="go_login">登录</string>
     <string name="input_verify">请输入验证码</string>
-    <string name="again_send">s后重新发送</string>
+    <string name="again_send">s</string>
     <string name="network_error">网络错误</string>
     <string name="login_success">登录成功</string>
     <string name="login_failure">登录失败</string>
     <string name="register_success">注册成功</string>
     <string name="register_failure">注册成功</string>
+    <string name="have_sent_msg">验证码已发送，请注意查收</string>
 </resources>
