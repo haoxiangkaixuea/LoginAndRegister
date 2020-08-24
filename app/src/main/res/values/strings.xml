@@ -16,7 +16,7 @@
     <string name="input_tellPhone">请输入手机号</string>
     <string name="get_verify">获取验证码</string>
     <string name="button_next">下一步</string>
-<!--    <string name="deal_after">已有账号，去</string>-->
+    <!--    <string name="deal_after">已有账号，去</string>-->
     <string name="deal_after"><Data><font color="#FFA1A6B3"> 已有账号，去</font>
         <font color="#477BEF">登录</font></Data></string>
     <string name="go_login">登录</string>
