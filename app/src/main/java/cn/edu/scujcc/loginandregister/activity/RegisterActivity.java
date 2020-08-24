@@ -97,9 +97,8 @@ public class RegisterActivity extends AppCompatActivity {
         imageVerify = findViewById(R.id.image_verify);
         imageBack = findViewById(R.id.image_back);
         tvGoLogin = findViewById(R.id.text_go_login);
-        //设置文字
+
         style.append(getResources().getString(R.string.deal_after));
-        //设置部分文字点击事件
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
@@ -109,7 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
         };
         style.setSpan(clickableSpan, 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvGoLogin.setText(style);
-        //配置给TextView
         tvGoLogin.setMovementMethod(LinkMovementMethod.getInstance());
         tvGoLogin.setText(style);
 
@@ -160,7 +158,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
         btnNext.setOnClickListener(v -> {
             registerSuccess();
         });
