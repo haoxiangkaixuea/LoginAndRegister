@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.Utils;
+package cn.edu.scujcc.loginandregister.util;
 
 import android.os.Handler;
 import android.os.Looper;

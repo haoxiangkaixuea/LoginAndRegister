@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
-import cn.edu.scujcc.loginandregister.Utils.EditTextUtils;
+import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.presenter.UserLab;
 
 /**
