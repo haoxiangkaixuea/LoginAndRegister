@@ -25,6 +25,6 @@
     <string name="login_success">登录成功</string>
     <string name="login_failure">登录失败</string>
     <string name="register_success">注册成功</string>
-    <string name="register_failure">注册成功</string>
+    <string name="register_failure">注册失败</string>
     <string name="have_sent_msg">验证码已发送，请注意查收</string>
 </resources>

@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,13 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.api.LoginCallBack;
+import cn.edu.scujcc.loginandregister.model.UserModel;
 import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 
@@ -29,7 +27,9 @@ import cn.edu.scujcc.loginandregister.util.EditTextUtils;
  * @author Administrator
  */
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     public static List<Activity> activityList = new LinkedList();
+    UserModel userModel;
     private EditText editUsername;
     private EditText editPassword;
     private Button btnSubmit;
@@ -38,41 +38,32 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView imagePassword;
     private ImageView imageClose;
     private TextView tvLogin;
-    private UserPresenter userLab = UserPresenter.getInstance();
-    private Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            switch (msg.what) {
-                case UserPresenter.MSG_LOGIN_SUCCESS:
-                    loginSuccess();
-                    break;
-                case UserPresenter.MSG_PASSWORD_ERROR:
-                    loginPasswordError();
-                    break;
-                case UserPresenter.MSG_NETWORK_ERROR:
-                    loginNetworkError();
-                    break;
-                default:
+
+    private void loginActivity() {
+
+        UserPresenter.login(new LoginCallBack() {
+            @Override
+            public void onLoginSuccess(String result) {
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
             }
-        }
-    };
 
-    private void loginSuccess() {
-        Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-    }
+            @Override
+            public void onLoginFailure(String msg) {
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
+            }
 
-    private void loginPasswordError() {
-        Toast.makeText(this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
-    }
-
-    private void loginNetworkError() {
-        Toast.makeText(this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+            @Override
+            public void networkError(Throwable t) {
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
@@ -109,7 +100,9 @@ public class LoginActivity extends AppCompatActivity {
             exit();
         });
         btnSubmit.setOnClickListener(v -> {
-            userLab.login(null, handler);
+            String name = editUsername.getText().toString().trim();
+            String pwd = editPassword.getText().toString().trim();
+            loginActivity();
         });
     }
 

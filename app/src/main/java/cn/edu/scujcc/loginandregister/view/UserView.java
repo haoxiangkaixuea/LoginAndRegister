@@ -12,7 +12,7 @@ public interface UserView {
     /**
      * 登陆失败
      */
-    void loginFailure(String error);
+    void loginFailure(String msg);
 
     /**
      * 注册成功
@@ -22,6 +22,11 @@ public interface UserView {
     /**
      * 注册失败
      */
-    void registerFailure(String error);
+    void registerFailure(String msg);
+
+    /**
+     * 登录失败
+     */
+    void networkError(Throwable t);
 }
 

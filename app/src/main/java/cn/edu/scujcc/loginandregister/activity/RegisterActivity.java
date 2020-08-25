@@ -5,16 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,10 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
 import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
@@ -49,38 +45,29 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView tvGetVerity;
     private TextView tvGoLogin;
     private String showVerify;
-    private Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            Log.d(TAG, "msg.arg1" + msg.arg1);
-            switch (msg.what) {
-                case UserPresenter.MSG_REGISTER_SUCCESS:
-                    showVerify = String.valueOf(msg.arg1);
-                    editVerify.setText(showVerify);
-                    break;
-                case UserPresenter.MSG_PASSWORD_ERROR:
-                    registerPasswordError();
-                    break;
-                case UserPresenter.MSG_NETWORK_ERROR:
-                    registerNetworkError();
-                    break;
-                default:
-                    break;
+
+    private void registerActivity() {
+
+        UserPresenter.register(new RegisterCallBack() {
+            @Override
+            public void onRegisterSuccess(String result) {
+                showVerify = result;
+                if (result != null) {
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+                }
             }
-        }
-    };
-    private UserPresenter userLab = UserPresenter.getInstance();
 
-    private void registerSuccess() {
-        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
-    }
+            @Override
+            public void onRegisterFailure(String msg) {
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
+            }
 
-    private void registerPasswordError() {
-        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
-    }
+            @Override
+            public void networkError(Throwable t) {
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
+            }
+        });
 
-    private void registerNetworkError() {
-        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -159,13 +146,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         btnNext.setOnClickListener(v -> {
-            registerSuccess();
+
         });
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone) {
+                registerActivity();
                 Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
-                userLab.register(null, handler);
+                editVerify.setText(showVerify);
+                String tell = editTellPhone.getText().toString().trim();
+                String verify = editVerify.getText().toString().trim();
                 CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
                 mCountDownTimerUtils.start();
             }

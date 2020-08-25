@@ -7,6 +7,11 @@ public class LoginUser {
     String userAccount;
     String password;
 
+    public LoginUser(String name, String pwd) {
+        this.userAccount = name;
+        this.password = pwd;
+    }
+
     @Override
     public String toString() {
         return "LoginUser{" +

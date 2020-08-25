@@ -7,6 +7,11 @@ public class RegisterUser {
     private String tellPhone;
     private String verity;
 
+    public RegisterUser(String tell, String verify) {
+        this.tellPhone = tell;
+        this.verity = verify;
+    }
+
     @Override
     public String toString() {
         return "PostUser{" +
