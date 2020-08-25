@@ -19,7 +19,6 @@ import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.api.LoginCallBack;
-import cn.edu.scujcc.loginandregister.model.UserModel;
 import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 
@@ -29,7 +28,6 @@ import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     public static List<Activity> activityList = new LinkedList();
-    UserModel userModel;
     private EditText editUsername;
     private EditText editPassword;
     private Button btnSubmit;
@@ -63,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
