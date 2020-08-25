@@ -28,9 +28,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
-import cn.edu.scujcc.loginandregister.presenter.UserLab;
 
 /**
  * @author Administrator
@@ -54,14 +54,14 @@ public class RegisterActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             Log.d(TAG, "msg.arg1" + msg.arg1);
             switch (msg.what) {
-                case UserLab.MSG_REGISTER_SUCCESS:
+                case UserPresenter.MSG_REGISTER_SUCCESS:
                     showVerify = String.valueOf(msg.arg1);
                     editVerify.setText(showVerify);
                     break;
-                case UserLab.MSG_PASSWORD_ERROR:
+                case UserPresenter.MSG_PASSWORD_ERROR:
                     registerPasswordError();
                     break;
-                case UserLab.MSG_NETWORK_ERROR:
+                case UserPresenter.MSG_NETWORK_ERROR:
                     registerNetworkError();
                     break;
                 default:
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     };
-    private UserLab userLab = UserLab.getInstance();
+    private UserPresenter userLab = UserPresenter.getInstance();
 
     private void registerSuccess() {
         Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();

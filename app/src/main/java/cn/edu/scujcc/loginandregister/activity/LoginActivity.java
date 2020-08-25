@@ -22,8 +22,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
-import cn.edu.scujcc.loginandregister.presenter.UserLab;
 
 /**
  * @author Administrator
@@ -38,18 +38,18 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView imagePassword;
     private ImageView imageClose;
     private TextView tvLogin;
-    private UserLab userLab = UserLab.getInstance();
+    private UserPresenter userLab = UserPresenter.getInstance();
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
-                case UserLab.MSG_LOGIN_SUCCESS:
+                case UserPresenter.MSG_LOGIN_SUCCESS:
                     loginSuccess();
                     break;
-                case UserLab.MSG_PASSWORD_ERROR:
+                case UserPresenter.MSG_PASSWORD_ERROR:
                     loginPasswordError();
                     break;
-                case UserLab.MSG_NETWORK_ERROR:
+                case UserPresenter.MSG_NETWORK_ERROR:
                     loginNetworkError();
                     break;
                 default:

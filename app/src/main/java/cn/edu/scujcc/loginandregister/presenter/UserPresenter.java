@@ -24,21 +24,21 @@ import retrofit2.Retrofit;
  *
  * @author Administrator
  */
-public class UserLab {
+public class UserPresenter {
     public final static int MSG_NETWORK_ERROR = -2;
     public final static int MSG_LOGIN_SUCCESS = 1;
     public final static int MSG_PASSWORD_ERROR = -1;
     public static final int MSG_REGISTER_SUCCESS = 2;
     private static final String TAG = "UserLab";
-    private static UserLab INSTANCE;
+    private static UserPresenter INSTANCE;
     private MediaType JSON = MediaType.get("application/json;charset=utf-8");
 
-    private UserLab() {
+    private UserPresenter() {
     }
 
-    public static UserLab getInstance() {
+    public static UserPresenter getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new UserLab();
+            INSTANCE = new UserPresenter();
         }
         return INSTANCE;
     }
@@ -67,7 +67,6 @@ public class UserLab {
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
-                String tokenId = "";
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
@@ -75,7 +74,7 @@ public class UserLab {
                         code = json.getString("code");
                         String context = json.getString("context");
                         JSONObject jason = new JSONObject(context);
-                        tokenId = jason.getString("tokenId");
+                        String tokenId = jason.getString("tokenId");
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
@@ -116,6 +115,7 @@ public class UserLab {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         RequestBody requestBody = RequestBody.create(JSON, content);
         Call<ResponseBody> call = api.register(requestBody);
         call.enqueue(new Callback<ResponseBody>() {
