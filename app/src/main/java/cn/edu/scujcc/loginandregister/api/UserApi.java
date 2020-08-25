@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 public interface UserApi {
     /**
      * @param requestBody 登录请求体
-     *                    动态添加请求头
+     *                    静态添加请求头
      */
     @Headers({
             "imei: 347558749E29B240957C58DAA6277D48"

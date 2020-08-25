@@ -13,6 +13,7 @@ public class RetrofitClient {
     public static Retrofit getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Retrofit.Builder()
+                    //Retrofit要求base url必须以"/"结尾
                     .baseUrl("http://172.32.12.243:20518/")
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

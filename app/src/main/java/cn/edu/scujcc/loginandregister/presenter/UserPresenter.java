@@ -74,7 +74,8 @@ public class UserPresenter {
                         code = json.getString("code");
                         String context = json.getString("context");
                         JSONObject jason = new JSONObject(context);
-                        String tokenId = jason.getString("tokenId");
+                        Log.d(TAG, "result" + result);
+                        //String tokenId = jason.getString("tokenId");
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
