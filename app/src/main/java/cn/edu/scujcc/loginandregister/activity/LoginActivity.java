@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.model.LoginUser;
 import cn.edu.scujcc.loginandregister.presenter.LoginPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.view.LoginView;
@@ -27,7 +31,7 @@ import cn.edu.scujcc.loginandregister.view.LoginView;
  */
 public class LoginActivity extends AppCompatActivity implements LoginView {
     private static final String TAG = "LoginActivity";
-    public static List<Activity> activityList = new LinkedList();
+    public static List<Activity> activityList = new LinkedList<>();
     private LoginPresenter presenter;
     private EditText editUsername;
     private EditText editPassword;
@@ -37,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private ImageView imagePassword;
     private ImageView imageClose;
     private TextView tvLogin;
+    private TextView tvDeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         imagePassword = findViewById(R.id.image_password);
         imageClose = findViewById(R.id.image_close);
         tvLogin = findViewById(R.id.text_login);
+        tvDeal = findViewById(R.id.deal_after);
+
+        SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 34, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 36, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvDeal.setText(spannableString);
+
+
         tvLogin.setOnClickListener(v -> {
             Intent intentLogin = new Intent(this, RegisterActivity.class);
             startActivity(intentLogin);
@@ -72,26 +87,20 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     }
                 } else {
                     btnSubmit.setBackgroundResource(R.drawable.btn_normal);
-                    btnSubmit.setTextColor(Color.WHITE);
+                    btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
                     btnSubmit.setEnabled(false);
                 }
             }
         });
         imageClose.setOnClickListener(view -> {
-            exit();
+            finish();
         });
         btnSubmit.setOnClickListener(v -> {
             String name = editUsername.getText().toString().trim();
             String pwd = editPassword.getText().toString().trim();
-            presenter.login();
+            LoginUser loginUser = new LoginUser(name, pwd);
+            presenter.login(loginUser);
         });
-    }
-
-    public void exit() {
-        for (Activity act : activityList) {
-            act.finish();
-        }
-        System.exit(0);
     }
 
     @Override

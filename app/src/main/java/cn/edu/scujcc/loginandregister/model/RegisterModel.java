@@ -2,13 +2,14 @@ package cn.edu.scujcc.loginandregister.model;
 
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
 import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
 import cn.edu.scujcc.loginandregister.api.UserApi;
+import cn.edu.scujcc.loginandregister.data.ResponseData;
+import cn.edu.scujcc.loginandregister.data.UserData;
 import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -37,16 +38,17 @@ public class RegisterModel {
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
+                String verificationCode = "";
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
-                        JSONObject json = new JSONObject(result);
-                        code = json.getString("code");
-                        String context = json.getString("context");
-                        JSONObject jason = new JSONObject(context);
-                        Log.d(TAG, "context  " + context);
-                        verificationCode = jason.getInt("verificationCode");
-                    } catch (IOException | JSONException e) {
+                        Gson gson = new Gson();
+                        ResponseData responseData = gson.fromJson(result, ResponseData.class);
+                        code = responseData.getCode();
+                        verificationCode = responseData.getContextData().getVerificationCode();
+                        Log.d(TAG, "code  " + code);
+                        Log.d(TAG, "verificationCode  " + verificationCode);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

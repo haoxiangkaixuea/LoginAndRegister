@@ -4,6 +4,7 @@ import android.util.Log;
 
 import cn.edu.scujcc.loginandregister.api.LoginCallBack;
 import cn.edu.scujcc.loginandregister.model.LoginModel;
+import cn.edu.scujcc.loginandregister.model.LoginUser;
 import cn.edu.scujcc.loginandregister.view.LoginView;
 
 /**
@@ -20,9 +21,9 @@ public class LoginPresenter {
         this.loginView = view;
     }
 
-    public void login() {
+    public void login(LoginUser loginUser) {
 
-        LoginModel.loginGetData(new LoginCallBack() {
+        LoginModel.loginGetData(loginUser, new LoginCallBack() {
             @Override
             public void onLoginSuccess(String result) {
                 Log.d(TAG, "result" + result);

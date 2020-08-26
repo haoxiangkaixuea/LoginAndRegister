@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.model;
+package cn.edu.scujcc.loginandregister.data;
 
 import org.json.JSONException;
 import org.json.JSONObject;

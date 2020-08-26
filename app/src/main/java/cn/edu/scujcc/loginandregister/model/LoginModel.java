@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import cn.edu.scujcc.loginandregister.api.LoginCallBack;
 import cn.edu.scujcc.loginandregister.api.UserApi;
+import cn.edu.scujcc.loginandregister.data.UserData;
 import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -42,7 +43,7 @@ public class LoginModel {
         return INSTANCE;
     }
 
-    public static void loginGetData(LoginCallBack loginCallBack) {
+    public static void loginGetData(LoginUser loginUser, LoginCallBack loginCallBack) {
         Retrofit retrofit = RetrofitClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = UserData.getLoginDate();
@@ -81,8 +82,6 @@ public class LoginModel {
             }
         });
     }
-
-
 }
 
 

@@ -141,12 +141,12 @@
         android:layout_marginStart="16dp"
         android:button="@drawable/checkbox_img"
         android:padding="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scroll_text"
+        app:layout_constraintBottom_toBottomOf="@+id/deal_after"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scroll_text" />
+        app:layout_constraintTop_toTopOf="@+id/deal_after" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/scroll_text"
+        android:id="@+id/deal_after"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -184,7 +184,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroll_text" />
+        app:layout_constraintTop_toBottomOf="@+id/deal_after" />
 
     <TextView
         android:id="@+id/text_go_login"

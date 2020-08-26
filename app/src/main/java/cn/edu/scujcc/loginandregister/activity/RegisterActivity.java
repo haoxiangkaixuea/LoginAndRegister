@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -46,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private ImageView imageBack;
     private TextView tvGetVerity;
     private TextView tvGoLogin;
+    private TextView tvDealFront;
     private String showVerify;
 
     @Override
@@ -63,6 +67,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         imageVerify = findViewById(R.id.image_verify);
         imageBack = findViewById(R.id.image_back);
         tvGoLogin = findViewById(R.id.text_go_login);
+        tvDealFront = findViewById(R.id.deal_front);
+        SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 34, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 36, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvDealFront.setText(spannableString);
 
         style.append(getResources().getString(R.string.deal_after));
         ClickableSpan clickableSpan = new ClickableSpan() {
