@@ -3,16 +3,7 @@ package cn.edu.scujcc.loginandregister.view;
 /**
  * @author Administrator
  */
-public interface UserView {
-    /**
-     * 登陆成功
-     */
-    void loginSuccess(String result);
-
-    /**
-     * 登陆失败
-     */
-    void loginFailure(String msg);
+public interface RegisterView {
 
     /**
      * 注册成功
@@ -28,5 +19,10 @@ public interface UserView {
      * 登录失败
      */
     void networkError(Throwable t);
+
+    /**
+     * 网络错误
+     */
+    void getData(String result);
 }
 

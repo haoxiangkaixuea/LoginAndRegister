@@ -1,28 +1,21 @@
 package cn.edu.scujcc.loginandregister.view;
 
+import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
+
 /**
  * @author Administrator
  */
-public class UserViewImpl implements UserView {
+public class UserViewImpl implements RegisterCallBack {
     private String result;
+    private String data;
 
     @Override
-    public void loginSuccess(String result) {
+    public void onRegisterSuccess(String result) {
 
     }
 
     @Override
-    public void loginFailure(String msg) {
-
-    }
-
-    @Override
-    public void registerSuccess(String result) {
-        this.result = result;
-    }
-
-    @Override
-    public void registerFailure(String msg) {
+    public void onRegisterFailure(String msg) {
 
     }
 
@@ -31,7 +24,7 @@ public class UserViewImpl implements UserView {
 
     }
 
-    public String getResult() {
-        return result;
-    }
+//    public String getResult() {
+//        return result;
+//    }
 }

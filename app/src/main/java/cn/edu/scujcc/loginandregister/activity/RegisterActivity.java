@@ -23,18 +23,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
-import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
-import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
+import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
+import cn.edu.scujcc.loginandregister.view.RegisterView;
+import cn.edu.scujcc.loginandregister.view.UserViewImpl;
 
 /**
  * @author Administrator
  */
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements RegisterView {
     private static final int TELL_MAX = 11;
     private static final String TAG = "RegisterActivity";
     private final SpannableStringBuilder style = new SpannableStringBuilder();
+    RegisterPresenter presenter;
+    UserViewImpl userView = new UserViewImpl();
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
@@ -46,35 +49,12 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView tvGoLogin;
     private String showVerify;
 
-    private void registerActivity() {
-
-        UserPresenter.register(new RegisterCallBack() {
-            @Override
-            public void onRegisterSuccess(String result) {
-                showVerify = result;
-                if (result != null) {
-                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onRegisterFailure(String msg) {
-                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void networkError(Throwable t) {
-                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        presenter = new RegisterPresenter(this);
         editTellPhone = findViewById(R.id.edit_tellPhone);
         tvGetVerity = findViewById(R.id.get_verify);
         editVerify = findViewById(R.id.edit_verify);
@@ -146,16 +126,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         btnNext.setOnClickListener(v -> {
-
+            presenter.register();
         });
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone) {
-                registerActivity();
+                presenter.register();
                 Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
-                editVerify.setText(showVerify);
-                String tell = editTellPhone.getText().toString().trim();
-                String verify = editVerify.getText().toString().trim();
                 CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
                 mCountDownTimerUtils.start();
             }
@@ -165,6 +142,28 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void registerSuccess(String result) {
+        if (result != null) {
+            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void registerFailure(String msg) {
+        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void networkError(Throwable t) {
+        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void getData(String result) {
+        editVerify.setText(result);
     }
 
     /**

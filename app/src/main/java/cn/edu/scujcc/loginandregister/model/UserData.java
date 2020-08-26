@@ -8,7 +8,7 @@ import org.json.JSONObject;
  *
  * @author Administrator
  */
-public class UserModel {
+public class UserData {
     public static String getLoginDate() {
         String content = "";
         try {

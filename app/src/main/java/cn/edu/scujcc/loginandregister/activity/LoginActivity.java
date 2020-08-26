@@ -18,16 +18,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.edu.scujcc.loginandregister.R;
-import cn.edu.scujcc.loginandregister.api.LoginCallBack;
-import cn.edu.scujcc.loginandregister.presenter.UserPresenter;
+import cn.edu.scujcc.loginandregister.presenter.LoginPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
+import cn.edu.scujcc.loginandregister.view.LoginView;
 
 /**
  * @author Administrator
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
     private static final String TAG = "LoginActivity";
     public static List<Activity> activityList = new LinkedList();
+    LoginPresenter presenter;
     private EditText editUsername;
     private EditText editPassword;
     private Button btnSubmit;
@@ -37,31 +38,12 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView imageClose;
     private TextView tvLogin;
 
-    private void loginActivity() {
-
-        UserPresenter.login(new LoginCallBack() {
-            @Override
-            public void onLoginSuccess(String result) {
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onLoginFailure(String msg) {
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void networkError(Throwable t) {
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        presenter = new LoginPresenter(this);
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
         imageUsername = findViewById(R.id.image_username);
@@ -99,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(v -> {
             String name = editUsername.getText().toString().trim();
             String pwd = editPassword.getText().toString().trim();
-            loginActivity();
+            presenter.login();
         });
     }
 
@@ -109,4 +91,21 @@ public class LoginActivity extends AppCompatActivity {
         }
         System.exit(0);
     }
+
+    @Override
+    public void loginSuccess(String result) {
+        Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginFailure(String msg) {
+        Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void networkError(Throwable t) {
+        Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+    }
+
 }
