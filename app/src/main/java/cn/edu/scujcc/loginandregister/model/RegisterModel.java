@@ -25,7 +25,7 @@ public class RegisterModel {
     private static MediaType JSON = MediaType.get("application/json;charset=utf-8");
     private static int verificationCode = 0;
 
-    public static void registerGetData(RegisterCallBack registerCallBack) {
+    public static void registerGetData(RegisterUser registerUser, RegisterCallBack registerCallBack) {
         Retrofit retrofit = RetrofitClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
         String content = UserData.getRegisterDate();

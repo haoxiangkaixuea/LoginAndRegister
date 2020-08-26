@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.loginandregister.R;
+import cn.edu.scujcc.loginandregister.model.RegisterUser;
 import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
@@ -72,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             }
         };
         style.setSpan(clickableSpan, 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvGoLogin.setText(style);
         tvGoLogin.setMovementMethod(LinkMovementMethod.getInstance());
         tvGoLogin.setText(style);
 
@@ -93,10 +93,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                     if (signUsername && signPassword) {
                         btnNext.setBackgroundResource(R.drawable.btn_focus_on);
                         btnNext.setTextColor(R.drawable.button_font_style);
+                        btnNext.setEnabled(true);
                     }
                 } else {
                     btnNext.setBackgroundResource(R.drawable.btn_normal);
                     btnNext.setTextColor(Color.WHITE);
+                    btnNext.setEnabled(false);
                 }
             }
         });
@@ -108,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
+                tvGetVerity.setTextColor(Color.parseColor("#FFA1A6B3"));
                 tvGetVerity.setEnabled(false);
             }
 
@@ -116,9 +118,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             public void afterTextChanged(Editable s) {
                 if (s != null && s.length() == TELL_MAX) {
                     tvGetVerity.setEnabled(true);
-                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorBlue, null));
+                    tvGetVerity.setTextColor(Color.parseColor("#FF477BEF"));
                 } else {
-                    tvGetVerity.setTextColor(getResources().getColor(R.color.colorGray, null));
+                    tvGetVerity.setTextColor(Color.parseColor("#FFA1A6B3"));
                     tvGetVerity.setEnabled(false);
                 }
             }
@@ -129,7 +131,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone) {
-                presenter.register();
+                String tell = editTellPhone.getText().toString().trim();
+                String verify = editVerify.getText().toString().trim();
+                RegisterUser registerUser = new RegisterUser(tell, verify);
+                presenter.register(registerUser);
                 Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
                 CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
                 mCountDownTimerUtils.start();
@@ -148,10 +153,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void registerFailure(String msg) {
+
     }
 
     @Override
     public void networkError(Throwable t) {
+        Toast.makeText(this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -176,7 +183,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             mTextView.setClickable(false);
             //设置倒计时时间
             mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));
-            mTextView.setTextColor(getResources().getColor(R.color.colorGray, null));
+            mTextView.setTextColor(Color.parseColor("#FFA1A6B3"));
             SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, false);
             SmsTimeUtils.startCountdown(tvGetVerity);
         }
@@ -185,7 +192,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         public void onFinish() {
             mTextView.setText(getResources().getString(R.string.get_verify));
             mTextView.setClickable(true);
-            mTextView.setTextColor(getResources().getColor(R.color.colorBlue, null));
+            mTextView.setTextColor(Color.parseColor("#FF477BEF"));
         }
     }
 }

@@ -68,10 +68,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     if (signUsername & signPassword) {
                         btnSubmit.setBackgroundResource(R.drawable.btn_focus_on);
                         btnSubmit.setTextColor(R.drawable.button_font_style);
+                        btnSubmit.setEnabled(true);
                     }
                 } else {
                     btnSubmit.setBackgroundResource(R.drawable.btn_normal);
                     btnSubmit.setTextColor(Color.WHITE);
+                    btnSubmit.setEnabled(false);
                 }
             }
         });
@@ -100,12 +102,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void loginFailure(String msg) {
         Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void networkError(Throwable t) {
         Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
     }
-
 }

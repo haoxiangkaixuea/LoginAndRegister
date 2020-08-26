@@ -4,6 +4,7 @@ import android.util.Log;
 
 import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
 import cn.edu.scujcc.loginandregister.model.RegisterModel;
+import cn.edu.scujcc.loginandregister.model.RegisterUser;
 import cn.edu.scujcc.loginandregister.view.RegisterView;
 import cn.edu.scujcc.loginandregister.view.UserViewImpl;
 
@@ -32,8 +33,8 @@ public class RegisterPresenter {
         this.registerView = view;
     }
 
-    public void register() {
-        RegisterModel.registerGetData(new RegisterCallBack() {
+    public void register(RegisterUser registerUser) {
+        RegisterModel.registerGetData(registerUser, new RegisterCallBack() {
             @Override
             public void onRegisterSuccess(String result) {
                 registerView.registerSuccess(result);
