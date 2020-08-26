@@ -1,5 +1,7 @@
 package cn.edu.scujcc.loginandregister.presenter;
 
+import android.util.Log;
+
 import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
 import cn.edu.scujcc.loginandregister.model.RegisterModel;
 import cn.edu.scujcc.loginandregister.view.RegisterView;
@@ -36,16 +38,19 @@ public class RegisterPresenter {
             public void onRegisterSuccess(String result) {
                 registerView.registerSuccess(result);
                 registerView.getData(result);
+                Log.d(TAG, "result " + result);
             }
 
             @Override
             public void onRegisterFailure(String msg) {
                 registerView.registerFailure(msg);
+                Log.d(TAG, "msg " + msg);
             }
 
             @Override
             public void networkError(Throwable t) {
                 registerView.networkError(t);
+                Log.d(TAG, "t " + t);
             }
         });
     }

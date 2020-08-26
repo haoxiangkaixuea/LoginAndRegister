@@ -27,7 +27,6 @@ import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
 import cn.edu.scujcc.loginandregister.view.RegisterView;
-import cn.edu.scujcc.loginandregister.view.UserViewImpl;
 
 /**
  * @author Administrator
@@ -37,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private static final String TAG = "RegisterActivity";
     private final SpannableStringBuilder style = new SpannableStringBuilder();
     RegisterPresenter presenter;
-    UserViewImpl userView = new UserViewImpl();
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
@@ -126,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             }
         });
         btnNext.setOnClickListener(v -> {
-            presenter.register();
+            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
         });
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
@@ -146,19 +144,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void registerSuccess(String result) {
-        if (result != null) {
-            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
-        }
     }
 
     @Override
     public void registerFailure(String msg) {
-        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_failure), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void networkError(Throwable t) {
-        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -16,12 +16,12 @@ public interface RegisterView {
     void registerFailure(String msg);
 
     /**
-     * 登录失败
+     * 网络错误
      */
     void networkError(Throwable t);
 
     /**
-     * 网络错误
+     * 获取数据
      */
     void getData(String result);
 }

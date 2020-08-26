@@ -15,7 +15,7 @@ public interface LoginView {
     void loginFailure(String msg);
 
     /**
-     * 登录失败
+     * 网络错误
      */
     void networkError(Throwable t);
 }

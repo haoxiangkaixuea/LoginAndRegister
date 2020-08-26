@@ -28,7 +28,7 @@ import cn.edu.scujcc.loginandregister.view.LoginView;
 public class LoginActivity extends AppCompatActivity implements LoginView {
     private static final String TAG = "LoginActivity";
     public static List<Activity> activityList = new LinkedList();
-    LoginPresenter presenter;
+    private LoginPresenter presenter;
     private EditText editUsername;
     private EditText editPassword;
     private Button btnSubmit;
