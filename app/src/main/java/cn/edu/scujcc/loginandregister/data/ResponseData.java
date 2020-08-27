@@ -5,23 +5,7 @@ package cn.edu.scujcc.loginandregister.data;
  */
 public class ResponseData {
     private String code;
-    private ContextData contextData;
-
-    @Override
-    public String toString() {
-        return "ResponseData{" +
-                "code='" + code + '\'' +
-                ", contextData=" + contextData +
-                '}';
-    }
-
-    public ContextData getContextData() {
-        return contextData;
-    }
-
-    public void setContextData(ContextData contextData) {
-        this.contextData = contextData;
-    }
+    private Context context;
 
     public String getCode() {
         return code;
@@ -31,7 +15,15 @@ public class ResponseData {
         this.code = code;
     }
 
-    public class ContextData {
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public class Context {
         private String verificationCode;
         private String tokenId;
 

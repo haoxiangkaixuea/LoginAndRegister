@@ -45,15 +45,13 @@ public class RegisterModel {
                         Gson gson = new Gson();
                         ResponseData responseData = gson.fromJson(result, ResponseData.class);
                         code = responseData.getCode();
-                        verificationCode = responseData.getContextData().getVerificationCode();
-                        Log.d(TAG, "code  " + code);
-                        Log.d(TAG, "verificationCode  " + verificationCode);
+                        verificationCode = responseData.getContext().getVerificationCode();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
                 if ("00".equals(code)) {
-                    String verify = String.valueOf(verificationCode);
+                    String verify = verificationCode;
                     Log.d(TAG, "verify  " + verify);
                     registerCallBack.onRegisterSuccess(verify);
                 } else {

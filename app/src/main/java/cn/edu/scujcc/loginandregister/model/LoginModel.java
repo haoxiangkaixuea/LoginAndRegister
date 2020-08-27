@@ -1,14 +1,12 @@
 package cn.edu.scujcc.loginandregister.model;
 
-import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
 import cn.edu.scujcc.loginandregister.api.LoginCallBack;
 import cn.edu.scujcc.loginandregister.api.UserApi;
+import cn.edu.scujcc.loginandregister.data.ResponseData;
 import cn.edu.scujcc.loginandregister.data.UserData;
 import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
 import okhttp3.MediaType;
@@ -58,14 +56,11 @@ public class LoginModel {
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
-                        JSONObject json = new JSONObject(result);
-                        code = json.getString("code");
-                        String context = json.getString("context");
-                        JSONObject jason = new JSONObject(context);
-                        Log.d(TAG, "result" + result);
-                        Log.d(TAG, "code" + code);
-                        tokenId = jason.getString("tokenId");
-                    } catch (IOException | JSONException e) {
+                        Gson gson = new Gson();
+                        ResponseData responseData = gson.fromJson(result, ResponseData.class);
+                        code = responseData.getCode();
+                        tokenId = responseData.getContext().getTokenId();
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
