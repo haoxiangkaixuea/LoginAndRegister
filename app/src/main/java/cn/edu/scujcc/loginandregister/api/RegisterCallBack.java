@@ -20,7 +20,9 @@ public interface RegisterCallBack {
     void onRegisterFailure(String msg);
 
     /**
-     * 登录失败
+     * 网络错误
+     *
+     * @param t 返回失败错误
      */
     void networkError(Throwable t);
 }

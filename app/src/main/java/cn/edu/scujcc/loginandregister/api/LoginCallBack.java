@@ -19,7 +19,9 @@ public interface LoginCallBack {
     void onLoginFailure(String msg);
 
     /**
-     * 登录失败
+     * 网络错误
+     *
+     * @param t 返回失败错误
      */
     void networkError(Throwable t);
 

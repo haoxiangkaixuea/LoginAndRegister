@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 获取网路请求
+ * JSON获取网路请求
  *
  * @author Administrator
  */

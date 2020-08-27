@@ -1,6 +1,8 @@
 package cn.edu.scujcc.loginandregister.data;
 
 /**
+ * GSON 获取数据
+ *
  * @author Administrator
  */
 public class ResponseData {
