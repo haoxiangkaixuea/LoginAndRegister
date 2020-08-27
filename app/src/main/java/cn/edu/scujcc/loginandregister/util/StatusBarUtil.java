@@ -17,6 +17,13 @@ import java.lang.reflect.Method;
 
 /**
  * @author Administrator
+ * 用法
+ *private void setConditionText() {
+ *         StatusBarUtil.setTranslucentStatus(LoginActivity.this);
+ *         StatusBarUtil.setStatusBarColor(this, Color.parseColor("#FAFAFA"));
+ *         StatusBarUtil.setImmersiveStatusBar(this, false);
+ *         StatusBarUtil.setStatusBarFontIconDark(this, StatusBarUtil.TYPE_M);
+ *     }
  */
 public class StatusBarUtil {
     /**

@@ -105,14 +105,17 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                     boolean signUsername = editTellPhone.getText().length() > 0;
                     boolean signPassword = editVerify.getText().length() > 0;
                     if (signUsername && signPassword) {
-                        btnNext.setBackgroundResource(R.drawable.btn_focus_on);
+                        btnNext.setBackgroundResource(R.drawable.button_onclick);
                         btnNext.setTextColor(R.drawable.button_font_style);
-                        btnNext.setEnabled(true);
+                        btnNext.setClickable(true);
+                        btnNext.setOnClickListener(v -> {
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+                        });
                     }
                 } else {
                     btnNext.setBackgroundResource(R.drawable.btn_normal);
                     btnNext.setTextColor(Color.WHITE);
-                    btnNext.setEnabled(false);
+                    btnNext.setClickable(false);
                 }
             }
         });
@@ -139,9 +142,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 }
             }
         });
-        btnNext.setOnClickListener(v -> {
-            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
-        });
+
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone) {

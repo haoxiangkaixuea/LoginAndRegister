@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -26,7 +24,6 @@ import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.model.LoginUser;
 import cn.edu.scujcc.loginandregister.presenter.LoginPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
-import cn.edu.scujcc.loginandregister.util.StatusBarUtil;
 import cn.edu.scujcc.loginandregister.view.LoginView;
 
 /**
@@ -49,12 +46,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置状态栏为透明色
-        //setConditionColor();
         setContentView(R.layout.activity_login);
 
-        //设置状态栏字体
-        //setConditionText();
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         presenter = new LoginPresenter(this);
         editUsername = findViewById(R.id.edit_username);
@@ -87,60 +80,27 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     boolean signUsername = editUsername.getText().length() > 0;
                     boolean signPassword = editPassword.getText().length() > 0;
                     if (signUsername & signPassword) {
-                        btnSubmit.setBackgroundResource(R.drawable.btn_focus_on);
+                        btnSubmit.setBackgroundResource(R.drawable.button_onclick);
                         btnSubmit.setTextColor(R.drawable.button_font_style);
-                        btnSubmit.setEnabled(true);
+                        btnSubmit.setClickable(true);
+                        btnSubmit.setOnClickListener(v -> {
+                            String name = editUsername.getText().toString().trim();
+                            String pwd = editPassword.getText().toString().trim();
+                            LoginUser loginUser = new LoginUser(name, pwd);
+                            presenter.login(loginUser);
+                        });
                     }
                 } else {
                     btnSubmit.setBackgroundResource(R.drawable.btn_normal);
                     btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
-                    btnSubmit.setEnabled(false);
+                    btnSubmit.setClickable(false);
                 }
             }
         });
         imageClose.setOnClickListener(view -> {
             finish();
         });
-        btnSubmit.setOnClickListener(v -> {
-            String name = editUsername.getText().toString().trim();
-            String pwd = editPassword.getText().toString().trim();
-            LoginUser loginUser = new LoginUser(name, pwd);
-            presenter.login(loginUser);
-        });
-    }
 
-    private void setConditionColor() {
-        Window window = getWindow();
-        //After LOLLIPOP not translucent status bar
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //Then call setStatusBarColor.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(Color.parseColor("#000000"));
-        }
-        //第二个参数是想要设置的颜色
-        //StatusBarCompatUtils.compat(this, Color.WHITE);
-        //BarUtils.setStatusBarColor(this,Color.parseColor("#4C64AD"));
-//        if (Build.VERSION.SDK_INT >= 21) {
-//            View decorView = getWindow().getDecorView();
-//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-//            decorView.setSystemUiVisibility(option);
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);
-//        }
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null){
-//            actionBar.hide();
-//        }
-    }
-
-    private void setConditionText() {
-        StatusBarUtil.setTranslucentStatus(LoginActivity.this);
-        StatusBarUtil.setStatusBarColor(this, Color.parseColor("#FAFAFA"));
-        StatusBarUtil.setImmersiveStatusBar(this, false);
-        StatusBarUtil.setStatusBarFontIconDark(this, StatusBarUtil.TYPE_M);
     }
 
     @Override
