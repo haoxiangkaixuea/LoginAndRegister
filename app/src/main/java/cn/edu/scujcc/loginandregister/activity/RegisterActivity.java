@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.model.RegisterUser;
 import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
@@ -57,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        ImmersionBar.with(this).statusBarDarkFont(true).init();
         presenter = new RegisterPresenter(this);
         editTellPhone = findViewById(R.id.edit_tellPhone);
         tvGetVerity = findViewById(R.id.get_verify);
