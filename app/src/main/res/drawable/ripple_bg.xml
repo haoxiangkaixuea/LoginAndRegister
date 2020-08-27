@@ -4,7 +4,7 @@
     <item android:state_enabled="true" android:state_pressed="true">
         <shape>
             <!--背景色-->
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="#E6AC0C" />
         </shape>
     </item>
 
@@ -12,7 +12,7 @@
     <item android:state_enabled="false" android:state_pressed="false">
         <shape>
             <!-- 背景色 -->
-            <solid android:color="@color/colorAccent" />
+            <solid android:color="#FFC730" />
         </shape>
     </item>
 

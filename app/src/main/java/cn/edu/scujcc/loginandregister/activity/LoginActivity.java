@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //导航栏与状态栏设置
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         presenter = new LoginPresenter(this);
         editUsername = findViewById(R.id.edit_username);
@@ -56,21 +57,28 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         imagePassword = findViewById(R.id.image_password);
         imageClose = findViewById(R.id.image_close);
         tvLogin = findViewById(R.id.text_login);
-        tvDeal = findViewById(R.id.deal_after);
 
-        SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 34, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 36, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvDeal.setText(spannableString);
+        //协议设置
+        setDeal();
+
         tvLogin.setOnClickListener(v -> {
             Intent intentLogin = new Intent(this, RegisterActivity.class);
             startActivity(intentLogin);
         });
 
+        //输入框的清除效果
         EditTextUtils.clearButtonListener(editUsername, imageUsername);
         EditTextUtils.clearButtonListener(editPassword, imagePassword);
+
+        //按钮背景转换事件
+        setButtonChange();
+
+        imageClose.setOnClickListener(view -> {
+            finish();
+        });
+    }
+
+    private void setButtonChange() {
         btnSubmit = findViewById(R.id.btn_register);
         checkBox = findViewById(R.id.cb_register);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,10 +105,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 }
             }
         });
-        imageClose.setOnClickListener(view -> {
-            finish();
-        });
+    }
 
+    private void setDeal() {
+        tvDeal = findViewById(R.id.deal_after);
+        SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 34, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 36, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvDeal.setText(spannableString);
     }
 
     @Override

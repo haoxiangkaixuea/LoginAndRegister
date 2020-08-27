@@ -69,56 +69,46 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         imageTellPhone = findViewById(R.id.image_tellPhone);
         imageVerify = findViewById(R.id.image_verify);
         imageBack = findViewById(R.id.image_back);
-        tvGoLogin = findViewById(R.id.text_go_login);
-        tvDealFront = findViewById(R.id.deal_front);
-        SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 34, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 36, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvDealFront.setText(spannableString);
 
-        style.append(getResources().getString(R.string.deal_after));
-        ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View widget) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        };
-        style.setSpan(clickableSpan, 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvGoLogin.setMovementMethod(LinkMovementMethod.getInstance());
-        tvGoLogin.setText(style);
-
+        //设置协议
+        setDealFront();
+        //设置底部登录事件
+        setBottomLogin();
         imageBack.setOnClickListener(v -> {
             Intent intentBack = new Intent(this, LoginActivity.class);
             startActivity(intentBack);
         });
 
+        //输入框的清除效果
         EditTextUtils.clearButtonListener(editTellPhone, imageTellPhone);
         EditTextUtils.clearButtonListener(editVerify, imageVerify);
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox.isChecked()) {
-                    boolean signUsername = editTellPhone.getText().length() > 0;
-                    boolean signPassword = editVerify.getText().length() > 0;
-                    if (signUsername && signPassword) {
-                        btnNext.setBackgroundResource(R.drawable.button_onclick);
-                        btnNext.setTextColor(R.drawable.button_font_style);
-                        btnNext.setClickable(true);
-                        btnNext.setOnClickListener(v -> {
-                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
-                        });
-                    }
-                } else {
-                    btnNext.setBackgroundResource(R.drawable.btn_normal);
-                    btnNext.setTextColor(Color.WHITE);
-                    btnNext.setClickable(false);
-                }
+        //按钮背景转换事件
+        setRegisterButtonChange();
+
+        //设置验证码倒计时事件
+        setVerifyTime();
+
+        //设置验证码点击事件
+        setVerifyClick();
+    }
+
+    private void setVerifyClick() {
+        tvGetVerity.setOnClickListener(view -> {
+            boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
+            if (tellPhone) {
+                String tell = editTellPhone.getText().toString().trim();
+                String verify = editVerify.getText().toString().trim();
+                RegisterUser registerUser = new RegisterUser(tell, verify);
+                presenter.register(registerUser);
+                Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
+                CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
+                mCountDownTimerUtils.start();
             }
         });
+    }
+
+    private void setVerifyTime() {
         editTellPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -142,19 +132,55 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 }
             }
         });
+    }
 
-        tvGetVerity.setOnClickListener(view -> {
-            boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
-            if (tellPhone) {
-                String tell = editTellPhone.getText().toString().trim();
-                String verify = editVerify.getText().toString().trim();
-                RegisterUser registerUser = new RegisterUser(tell, verify);
-                presenter.register(registerUser);
-                Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
-                CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
-                mCountDownTimerUtils.start();
+    private void setRegisterButtonChange() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (checkBox.isChecked()) {
+                    boolean signUsername = editTellPhone.getText().length() > 0;
+                    boolean signPassword = editVerify.getText().length() > 0;
+                    if (signUsername && signPassword) {
+                        btnNext.setBackgroundResource(R.drawable.button_onclick);
+                        btnNext.setTextColor(R.drawable.button_font_style);
+                        btnNext.setClickable(true);
+                        btnNext.setOnClickListener(v -> {
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+                        });
+                    }
+                } else {
+                    btnNext.setBackgroundResource(R.drawable.btn_normal);
+                    btnNext.setTextColor(Color.WHITE);
+                    btnNext.setClickable(false);
+                }
             }
         });
+    }
+
+    private void setBottomLogin() {
+        tvGoLogin = findViewById(R.id.text_go_login);
+        style.append(getResources().getString(R.string.deal_after));
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        };
+        style.setSpan(clickableSpan, 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvGoLogin.setMovementMethod(LinkMovementMethod.getInstance());
+        tvGoLogin.setText(style);
+    }
+
+    private void setDealFront() {
+        tvDealFront = findViewById(R.id.deal_front);
+        SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 34, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 36, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvDealFront.setText(spannableString);
     }
 
     @Override
