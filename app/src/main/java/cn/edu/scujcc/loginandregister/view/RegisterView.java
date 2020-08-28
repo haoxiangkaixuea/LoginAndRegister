@@ -32,5 +32,12 @@ public interface RegisterView {
      * @param result 获取验证码数据
      */
     void getData(String result);
+
+    /**
+     * 返回数据
+     *
+     * @param message 返回message数据
+     */
+    void getMessage(String message);
 }
 

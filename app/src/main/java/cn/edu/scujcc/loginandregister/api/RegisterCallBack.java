@@ -25,4 +25,11 @@ public interface RegisterCallBack {
      * @param t 返回失败错误
      */
     void networkError(Throwable t);
+
+    /**
+     * 返回数据
+     *
+     * @param message 返回message数据
+     */
+    void getMessage(String message);
 }

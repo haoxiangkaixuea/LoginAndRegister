@@ -275,7 +275,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void registerFailure(String msg) {
-
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -286,6 +286,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     public void getData(String result) {
         editVerify.setText(result);
+    }
+
+    @Override
+    public void getMessage(String message) {
+        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
     /**

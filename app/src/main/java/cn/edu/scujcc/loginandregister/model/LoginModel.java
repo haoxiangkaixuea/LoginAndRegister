@@ -1,5 +1,7 @@
 package cn.edu.scujcc.loginandregister.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -55,21 +57,27 @@ public class LoginModel {
                 String result = "";
                 String code = "";
                 String tokenId = "";
+                String message = "";
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
+                        Log.d(TAG, "result  " + result);
                         Gson gson = new Gson();
                         ResponseData responseData = gson.fromJson(result, ResponseData.class);
                         code = responseData.getCode();
                         tokenId = responseData.getContext().getTokenId();
+                        message = responseData.getMessage();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
                 if ("00".equals(code)) {
+                    Log.d(TAG, "code" + code);
                     loginCallBack.onLoginSuccess(tokenId);
+                    loginCallBack.getMessage(message);
                 } else {
-                    loginCallBack.onLoginFailure(code);
+                    loginCallBack.onLoginFailure(message);
                 }
             }
 

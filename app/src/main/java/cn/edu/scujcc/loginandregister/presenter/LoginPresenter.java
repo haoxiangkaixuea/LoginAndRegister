@@ -11,7 +11,7 @@ import cn.edu.scujcc.loginandregister.view.LoginView;
  * @author Administrator
  */
 public class LoginPresenter {
-    private static final String TAG = "LRPresenter";
+    private static final String TAG = "LoginPresenter";
     /**
      * View接口
      */
@@ -33,11 +33,18 @@ public class LoginPresenter {
             @Override
             public void onLoginFailure(String msg) {
                 loginView.loginFailure(msg);
+                Log.d(TAG, "msg" + msg);
             }
 
             @Override
             public void networkError(Throwable t) {
                 loginView.networkError(t);
+            }
+
+            @Override
+            public void getMessage(String message) {
+                loginView.getMessage(message);
+                Log.d(TAG, "message" + message);
             }
         });
     }

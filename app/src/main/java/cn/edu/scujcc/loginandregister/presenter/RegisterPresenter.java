@@ -42,6 +42,11 @@ public class RegisterPresenter {
                 registerView.networkError(t);
                 Log.d(TAG, "t " + t);
             }
+
+            @Override
+            public void getMessage(String message) {
+                registerView.getMessage(message);
+            }
         });
     }
 }

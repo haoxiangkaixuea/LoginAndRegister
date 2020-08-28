@@ -39,13 +39,16 @@ public class RegisterModel {
                 String result = "";
                 String code = "";
                 String verificationCode = "";
+                String message = "";
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
+                        Log.d(TAG, "result  " + result);
                         Gson gson = new Gson();
                         ResponseData responseData = gson.fromJson(result, ResponseData.class);
                         code = responseData.getCode();
                         verificationCode = responseData.getContext().getVerificationCode();
+                        message = responseData.getMessage();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -54,8 +57,9 @@ public class RegisterModel {
                     String verify = verificationCode;
                     Log.d(TAG, "verify  " + verify);
                     registerCallBack.onRegisterSuccess(verify);
+                    registerCallBack.getMessage(message);
                 } else {
-                    registerCallBack.onRegisterFailure(result);
+                    registerCallBack.onRegisterFailure(message);
                 }
             }
 

@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -176,12 +177,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void loginFailure(String msg) {
-        Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "msg" + msg);
+        Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure) + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void networkError(Throwable t) {
         Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getMessage(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }
 

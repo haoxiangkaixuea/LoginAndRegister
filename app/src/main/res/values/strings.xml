@@ -28,4 +28,5 @@
     <string name="register_failure">注册失败</string>
     <string name="have_sent_msg">验证码已发送，请注意查收</string>
     <string name="tell_true">请输入十一位手机号码</string>
+    <string name="often_verify"></string>
 </resources>

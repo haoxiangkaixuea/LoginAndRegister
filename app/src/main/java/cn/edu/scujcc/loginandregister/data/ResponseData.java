@@ -7,7 +7,16 @@ package cn.edu.scujcc.loginandregister.data;
  */
 public class ResponseData {
     private String code;
+    private String message;
     private Context context;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getCode() {
         return code;
