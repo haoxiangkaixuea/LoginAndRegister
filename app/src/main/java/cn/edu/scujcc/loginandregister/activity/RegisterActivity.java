@@ -22,7 +22,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -129,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 String verify = editVerify.getText().toString().trim();
                 RegisterUser registerUser = new RegisterUser(tell, verify);
                 presenter.register(registerUser);
-                Toast.makeText(this, getResources().getString(R.string.have_sent_msg), Toast.LENGTH_SHORT).show();
+                ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.have_sent_msg));
                 CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
                 mCountDownTimerUtils.start();
             }

@@ -16,7 +16,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -189,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void getMessage(String message) {
-        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(LoginActivity.this, message);
     }
 }
 
