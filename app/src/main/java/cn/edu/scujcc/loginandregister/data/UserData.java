@@ -42,11 +42,4 @@ public class UserData {
         }
         return content;
     }
-
-//    public static void get(RetrofitCallBack c){
-//        String content = "";
-//
-//        c.onRegisterSuccess(content);
-//
-//    }
 }

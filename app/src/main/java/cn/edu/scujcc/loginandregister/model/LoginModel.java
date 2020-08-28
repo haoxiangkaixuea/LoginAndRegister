@@ -22,7 +22,9 @@ import retrofit2.Retrofit;
 public class LoginModel {
     private static final String TAG = "LoginModel";
 
-    //单例模式
+    /**
+     * 单例模式
+     */
     private static volatile LoginModel INSTANCE;
     private static MediaType JSON = MediaType.get("application/json;charset=utf-8");
 
