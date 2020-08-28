@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (editTellPhone.getText().length() < 11) {
-                    ToastUtils.showToast(RegisterActivity.this, getResources().getString(R.string.tell_true));
+                    ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.tell_true));
                 }
             }
 
@@ -227,7 +227,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                         btnNext.setTextColor(R.drawable.button_font_style);
                         btnNext.setClickable(true);
                         btnNext.setOnClickListener(v -> {
-                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_LONG).show();
+                            ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.register_success));
                         });
                     }
                 } else {
@@ -275,12 +275,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void registerFailure(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(RegisterActivity.this, msg);
     }
 
     @Override
     public void networkError(Throwable t) {
-        Toast.makeText(this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.network_error));
     }
 
     @Override
@@ -290,7 +290,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void getMessage(String message) {
-        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(RegisterActivity.this, message);
     }
 
     /**

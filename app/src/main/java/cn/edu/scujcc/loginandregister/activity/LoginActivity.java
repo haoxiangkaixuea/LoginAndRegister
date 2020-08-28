@@ -26,6 +26,7 @@ import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.model.LoginUser;
 import cn.edu.scujcc.loginandregister.presenter.LoginPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
+import cn.edu.scujcc.loginandregister.util.ToastUtils;
 import cn.edu.scujcc.loginandregister.view.LoginView;
 
 /**
@@ -172,18 +173,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void loginSuccess(String result) {
-        Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(LoginActivity.this, getResources().getString(R.string.login_success));
     }
 
     @Override
     public void loginFailure(String msg) {
         Log.d(TAG, "msg" + msg);
-        Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_failure) + msg, Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(LoginActivity.this, getResources().getString(R.string.login_failure) + msg);
     }
 
     @Override
     public void networkError(Throwable t) {
-        Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+        ToastUtils.shortToast(LoginActivity.this, getResources().getString(R.string.network_error));
     }
 
     @Override

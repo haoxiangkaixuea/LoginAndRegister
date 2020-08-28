@@ -34,4 +34,16 @@ public class ToastUtils {
         }
         toast.show();
     }
+
+    public static void shortToast(Context context, String name) {
+        Toast toast = Toast.makeText(context, null, Toast.LENGTH_SHORT);
+        toast.setText(name);
+        toast.show();
+    }
+
+    public static void longToast(Context context, String name) {
+        Toast toast = Toast.makeText(context, null, Toast.LENGTH_LONG);
+        toast.setText(name);
+        toast.show();
+    }
 }
