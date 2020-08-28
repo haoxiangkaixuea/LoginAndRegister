@@ -1,5 +1,7 @@
 package cn.edu.scujcc.loginandregister.data;
 
+import androidx.annotation.NonNull;
+
 /**
  * GSON 获取数据
  *
@@ -38,6 +40,7 @@ public class ResponseEntente {
         private String verificationCode;
         private String tokenId;
 
+        @NonNull
         @Override
         public String toString() {
             return "ContextData{" +

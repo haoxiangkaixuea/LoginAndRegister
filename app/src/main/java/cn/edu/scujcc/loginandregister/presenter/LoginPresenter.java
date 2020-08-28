@@ -12,6 +12,7 @@ import cn.edu.scujcc.loginandregister.view.LoginView;
  */
 public class LoginPresenter {
     private static final String TAG = "LoginPresenter";
+    LoginModel loginModel = LoginModel.getInstance();
     /**
      * View接口
      */
@@ -23,7 +24,7 @@ public class LoginPresenter {
 
     public void login(LoginUser loginUser) {
 
-        LoginModel.getData(loginUser, new LoginCallBack() {
+        loginModel.getData(loginUser, new LoginCallBack() {
             @Override
             public void onLoginSuccess(String result) {
                 Log.d(TAG, "result" + result);

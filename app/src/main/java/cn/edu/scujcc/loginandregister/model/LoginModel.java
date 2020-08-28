@@ -2,6 +2,8 @@ package cn.edu.scujcc.loginandregister.model;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -69,7 +71,7 @@ public class LoginModel {
         Call<ResponseBody> call = api.login(requestBody);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
                 String tokenId = "";
@@ -97,7 +99,7 @@ public class LoginModel {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, Throwable t) {
                 loginCallBack.networkError(t);
             }
         });

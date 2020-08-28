@@ -13,6 +13,7 @@ import cn.edu.scujcc.loginandregister.view.RegisterView;
 public class RegisterPresenter {
 
     private static final String TAG = "RegisterPresenter";
+    RegisterModel registerModel = RegisterModel.getInstance();
     /**
      * View接口
      */
@@ -23,7 +24,7 @@ public class RegisterPresenter {
     }
 
     public void register(RegisterUser registerUser) {
-        RegisterModel.getData(registerUser, new RegisterCallBack() {
+        registerModel.getData(registerUser, new RegisterCallBack() {
             @Override
             public void onRegisterSuccess(String result) {
                 registerView.registerSuccess(result);

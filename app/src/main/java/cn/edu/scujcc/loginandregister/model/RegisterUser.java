@@ -1,5 +1,7 @@
 package cn.edu.scujcc.loginandregister.model;
 
+import androidx.annotation.NonNull;
+
 /**
  * @author Administrator
  */
@@ -12,6 +14,7 @@ public class RegisterUser {
         this.verity = verify;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "PostUser{" +

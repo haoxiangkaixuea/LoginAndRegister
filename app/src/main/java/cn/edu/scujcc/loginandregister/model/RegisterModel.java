@@ -2,6 +2,8 @@ package cn.edu.scujcc.loginandregister.model;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -27,7 +29,25 @@ import retrofit2.Retrofit;
 public class RegisterModel {
     private static final String TAG = "RegisterModel";
     private static MediaType JSON = MediaType.get("application/json;charset=utf-8");
-    private static int verificationCode = 0;
+    /**
+     * 单例模式
+     */
+    private static volatile RegisterModel INSTANCE;
+
+    public RegisterModel() {
+
+    }
+
+    public static RegisterModel getInstance() {
+        if (INSTANCE == null) {
+            synchronized (RegisterModel.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new RegisterModel();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 
     public void getData(RegisterUser registerUser, RegisterCallBack registerCallBack) {
         Retrofit retrofit = RetrofitClient.getInstance();
@@ -49,7 +69,7 @@ public class RegisterModel {
         Call<ResponseBody> call = api.register(requestBody);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
                 String result = "";
                 String code = "";
                 String verificationCode = "";
@@ -78,7 +98,7 @@ public class RegisterModel {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 registerCallBack.networkError(t);
             }
         });
