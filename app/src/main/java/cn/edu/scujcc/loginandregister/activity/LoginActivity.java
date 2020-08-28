@@ -3,8 +3,11 @@ package cn.edu.scujcc.loginandregister.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -63,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             startActivity(intentLogin);
         });
 
-        //输入框的清除效果
+        //输入框的清除按钮
         EditTextUtils.clearButtonListener(editUsername, imageUsername);
         EditTextUtils.clearButtonListener(editPassword, imagePassword);
 
@@ -75,6 +78,57 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         });
     }
 
+    private void setEditText() {
+
+        editUsername.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (TextUtils.isEmpty(editUsername.getText()) || TextUtils.isEmpty(editPassword.getText())) {
+                    btnSubmit.setBackgroundResource(R.drawable.btn_normal);
+                    btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+                    btnSubmit.setClickable(false);
+                } else {
+                    btnSubmit.setBackgroundResource(R.drawable.button_onclick);
+                    btnSubmit.setTextColor(R.drawable.button_font_style);
+                    btnSubmit.setClickable(true);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        editPassword.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(editUsername.getText()) || TextUtils.isEmpty(editPassword.getText())) {
+                    btnSubmit.setBackgroundResource(R.drawable.btn_normal);
+                    btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+                    btnSubmit.setClickable(false);
+                } else {
+                    btnSubmit.setBackgroundResource(R.drawable.button_onclick);
+                    btnSubmit.setTextColor(R.drawable.button_font_style);
+                    btnSubmit.setClickable(true);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
     private void setButtonChange() {
         btnSubmit = findViewById(R.id.btn_register);
         checkBox = findViewById(R.id.cb_register);
@@ -82,6 +136,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (checkBox.isChecked()) {
+                    setEditText();
                     boolean signUsername = editUsername.getText().length() > 0;
                     boolean signPassword = editPassword.getText().length() > 0;
                     if (signUsername && signPassword) {
@@ -97,7 +152,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     }
                 } else {
                     btnSubmit.setBackgroundResource(R.drawable.btn_normal);
-                    btnSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+                    btnSubmit.setTextColor(Color.WHITE);
                     btnSubmit.setClickable(false);
                 }
             }
@@ -129,3 +184,4 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Toast.makeText(LoginActivity.this, getResources().getString(R.string.network_error), Toast.LENGTH_SHORT).show();
     }
 }
+

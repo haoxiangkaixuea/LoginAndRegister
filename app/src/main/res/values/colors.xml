@@ -7,4 +7,6 @@
     <color name="colorGray">#FFA1A6B3</color>
     <color name="colorWhite">#00000000</color>
     <color name="colorDark">#000000</color>
+    <color name="colorBasicWhite">#ffffff</color>
+    <color name="colorAutoDismissToast">#88000000</color>
 </resources>

@@ -10,6 +10,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -32,6 +33,7 @@ import cn.edu.scujcc.loginandregister.model.RegisterUser;
 import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
+import cn.edu.scujcc.loginandregister.util.ToastUtils;
 import cn.edu.scujcc.loginandregister.view.RegisterView;
 
 /**
@@ -72,28 +74,54 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
         //设置协议
         setDealFront();
+
         //设置底部登录事件
         setBottomLogin();
+
         imageBack.setOnClickListener(v -> {
             Intent intentBack = new Intent(this, LoginActivity.class);
             startActivity(intentBack);
         });
 
-        //输入框的清除效果
+        //输入框的清除按钮事件
         EditTextUtils.clearButtonListener(editTellPhone, imageTellPhone);
         EditTextUtils.clearButtonListener(editVerify, imageVerify);
 
         //按钮背景转换事件
         setRegisterButtonChange();
 
-        //设置验证码倒计时事件
+        //设置文字验证码颜色改变事件
+        setVerifyChange();
+
+        //设置文字验证码倒计时事件
         setVerifyTime();
 
-        //设置验证码点击事件
+        //添加验证码输入框点击事件
         setVerifyClick();
     }
 
     private void setVerifyClick() {
+        editVerify.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (editTellPhone.getText().length() < 11) {
+                    ToastUtils.showToast(RegisterActivity.this, getResources().getString(R.string.tell_true));
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void setVerifyTime() {
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone) {
@@ -108,11 +136,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         });
     }
 
-    private void setVerifyTime() {
+    private void setVerifyChange() {
         editTellPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                tvGetVerity.setTextColor(Color.parseColor("#FFA1A6B3"));
+                tvGetVerity.setEnabled(false);
             }
 
             @Override
@@ -123,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s != null && s.length() == TELL_MAX) {
+                if (s.length() == TELL_MAX) {
                     tvGetVerity.setEnabled(true);
                     tvGetVerity.setTextColor(Color.parseColor("#FF477BEF"));
                 } else {
@@ -134,11 +163,63 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         });
     }
 
+    private void setEditText() {
+
+        editTellPhone.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (TextUtils.isEmpty(editTellPhone.getText()) || TextUtils.isEmpty(editVerify.getText())) {
+                    btnNext.setBackgroundResource(R.drawable.btn_normal);
+                    btnNext.setTextColor(Color.parseColor("#FFFFFF"));
+                    btnNext.setClickable(false);
+                } else {
+                    btnNext.setBackgroundResource(R.drawable.button_onclick);
+                    btnNext.setTextColor(R.drawable.button_font_style);
+                    btnNext.setClickable(true);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        editVerify.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(editTellPhone.getText()) || TextUtils.isEmpty(editVerify.getText())) {
+                    btnNext.setBackgroundResource(R.drawable.btn_normal);
+                    btnNext.setTextColor(Color.parseColor("#FFFFFF"));
+                    btnNext.setClickable(false);
+                } else {
+                    btnNext.setBackgroundResource(R.drawable.button_onclick);
+                    btnNext.setTextColor(R.drawable.button_font_style);
+                    btnNext.setClickable(true);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
     private void setRegisterButtonChange() {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (checkBox.isChecked()) {
+                    setEditText();
                     boolean signUsername = editTellPhone.getText().length() > 0;
                     boolean signPassword = editVerify.getText().length() > 0;
                     if (signUsername && signPassword) {
