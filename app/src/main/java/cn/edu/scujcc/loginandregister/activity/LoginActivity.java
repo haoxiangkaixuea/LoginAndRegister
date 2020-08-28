@@ -2,7 +2,6 @@ package cn.edu.scujcc.loginandregister.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyf.immersionbar.ImmersionBar;
@@ -42,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private TextView tvLogin;
     private TextView tvDeal;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 if (checkBox.isChecked()) {
                     boolean signUsername = editUsername.getText().length() > 0;
                     boolean signPassword = editPassword.getText().length() > 0;
-                    if (signUsername & signPassword) {
+                    if (signUsername && signPassword) {
                         btnSubmit.setBackgroundResource(R.drawable.button_onclick);
                         btnSubmit.setTextColor(R.drawable.button_font_style);
                         btnSubmit.setClickable(true);

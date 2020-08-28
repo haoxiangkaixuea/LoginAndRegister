@@ -136,40 +136,45 @@
             app:srcCompat="@drawable/ic_edittext_clean" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <CheckBox
-        android:id="@+id/cb_login"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/deal_after"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:button="@drawable/checkbox_img"
-        android:padding="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/deal_after"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/deal_after" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/deal_after"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:padding="0dp"
-        android:fillViewport="true"
-        app:layout_constraintStart_toEndOf="@+id/cb_login"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_verify">
 
-        <TextView
-            android:id="@+id/deal_front"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deal_front"
-            android:textColor="#FFA1A6B3"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_register"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal"
+            android:padding="0dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <CheckBox
+                android:id="@+id/cb_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:button="@drawable/checkbox_img"
+                android:padding="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/deal_front"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:focusable="false"
+                android:padding="0dp"
+                android:text="@string/deal_front"
+                android:textColor="#FFA1A6B3"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_login"
