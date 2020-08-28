@@ -16,7 +16,6 @@
         <meta-data
             android:name="android.notch_support"
             android:value="true" />
-
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask">
@@ -29,7 +28,7 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>
