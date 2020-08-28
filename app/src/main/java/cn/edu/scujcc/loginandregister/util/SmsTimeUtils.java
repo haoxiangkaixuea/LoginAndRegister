@@ -30,10 +30,6 @@ public class SmsTimeUtils {
     /*设置提现账户
       预计结束的时间*/
     private static long SETTING_FINANCE_ACCOUNT_TIME_END = 0;
-    /*注册*/
-    private static long REGISTER_TIME_END = 0;
-    /*忘记密码*/
-    private static long FORGET_PASSWORD_TIME_END = 0;
     /*提现*/
     private static long WITHDRAW_CASH_END = 0;
 

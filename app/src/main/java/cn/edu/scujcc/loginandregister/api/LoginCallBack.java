@@ -7,14 +7,14 @@ public interface LoginCallBack {
     /**
      * 登陆成功
      *
-     * @param result 返回登陆成功的结果
+     * @param result 返回登录成功的结果
      */
     void onLoginSuccess(String result);
 
     /**
      * 登录失败
      *
-     * @param msg 返回登陆失败的结果
+     * @param msg 返回登录失败的结果
      */
     void onLoginFailure(String msg);
 

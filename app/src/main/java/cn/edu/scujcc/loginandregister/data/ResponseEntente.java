@@ -5,7 +5,7 @@ package cn.edu.scujcc.loginandregister.data;
  *
  * @author Administrator
  */
-public class ResponseData {
+public class ResponseEntente {
     private String code;
     private String message;
     private Context context;

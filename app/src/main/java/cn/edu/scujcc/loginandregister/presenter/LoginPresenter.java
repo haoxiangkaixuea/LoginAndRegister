@@ -23,7 +23,7 @@ public class LoginPresenter {
 
     public void login(LoginUser loginUser) {
 
-        LoginModel.loginGetData(loginUser, new LoginCallBack() {
+        LoginModel.getData(loginUser, new LoginCallBack() {
             @Override
             public void onLoginSuccess(String result) {
                 Log.d(TAG, "result" + result);

@@ -4,12 +4,15 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import cn.edu.scujcc.loginandregister.Constants;
 import cn.edu.scujcc.loginandregister.api.LoginCallBack;
 import cn.edu.scujcc.loginandregister.api.UserApi;
-import cn.edu.scujcc.loginandregister.data.ResponseData;
-import cn.edu.scujcc.loginandregister.data.UserData;
+import cn.edu.scujcc.loginandregister.data.ResponseEntente;
 import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -45,10 +48,23 @@ public class LoginModel {
         return INSTANCE;
     }
 
-    public static void loginGetData(LoginUser loginUser, LoginCallBack loginCallBack) {
+    public void getData(LoginUser loginUser, LoginCallBack loginCallBack) {
         Retrofit retrofit = RetrofitClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
-        String content = UserData.getLoginDate();
+        String content = "";
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("userAccount", "15928132503");
+            jsonObject.put("clientVersion", "1.1.1.6");
+            jsonObject.put("password", "h5FHIuvx/7Mym38LnFjPX5dpQvypNfjLM+z+K7QRj3ZY47EoR7BbdhH39RAfBQWKxfU0TcGfvTuj8213MEuU1it63viplz9S0gNzOvtgti3kTXpWtoH03xwaMRT7e6Mj/jtmr66/6d67hmf7Ltx86g==|MTIzNDU2Nzg5MDk4NzY1NA==|GTRU949nFZn62MZaCSlKQg==");
+            jsonObject.put("code", "3E8744hk6618");
+            jsonObject.put("deviceId", "1116B2B9DBD20633807E7DDB450373A0");
+            jsonObject.put("imei", "347558749E29B240957C58DAA6277D48");
+            //json串转string类型
+            content = String.valueOf(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         RequestBody requestBody = RequestBody.create(JSON, content);
         Call<ResponseBody> call = api.login(requestBody);
         call.enqueue(new Callback<ResponseBody>() {
@@ -63,16 +79,15 @@ public class LoginModel {
                         result = response.body().string();
                         Log.d(TAG, "result  " + result);
                         Gson gson = new Gson();
-                        ResponseData responseData = gson.fromJson(result, ResponseData.class);
-                        code = responseData.getCode();
-                        tokenId = responseData.getContext().getTokenId();
-                        message = responseData.getMessage();
-
+                        ResponseEntente responseEntente = gson.fromJson(result, ResponseEntente.class);
+                        code = responseEntente.getCode();
+                        tokenId = responseEntente.getContext().getTokenId();
+                        message = responseEntente.getMessage();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                if ("00".equals(code)) {
+                if (Constants.GET_CODE.equals(code)) {
                     Log.d(TAG, "code" + code);
                     loginCallBack.onLoginSuccess(tokenId);
                     loginCallBack.getMessage(message);

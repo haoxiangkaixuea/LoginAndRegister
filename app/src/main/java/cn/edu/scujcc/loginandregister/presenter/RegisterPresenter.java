@@ -23,7 +23,7 @@ public class RegisterPresenter {
     }
 
     public void register(RegisterUser registerUser) {
-        RegisterModel.registerGetData(registerUser, new RegisterCallBack() {
+        RegisterModel.getData(registerUser, new RegisterCallBack() {
             @Override
             public void onRegisterSuccess(String result) {
                 registerView.registerSuccess(result);

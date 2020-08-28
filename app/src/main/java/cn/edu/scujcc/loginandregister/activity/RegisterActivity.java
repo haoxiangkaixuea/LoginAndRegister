@@ -53,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     private TextView tvGetVerity;
     private TextView tvGoLogin;
     private TextView tvDealFront;
-    private String showVerify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

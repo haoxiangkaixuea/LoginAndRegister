@@ -4,12 +4,15 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import cn.edu.scujcc.loginandregister.Constants;
 import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
 import cn.edu.scujcc.loginandregister.api.UserApi;
-import cn.edu.scujcc.loginandregister.data.ResponseData;
-import cn.edu.scujcc.loginandregister.data.UserData;
+import cn.edu.scujcc.loginandregister.data.ResponseEntente;
 import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -26,10 +29,21 @@ public class RegisterModel {
     private static MediaType JSON = MediaType.get("application/json;charset=utf-8");
     private static int verificationCode = 0;
 
-    public static void registerGetData(RegisterUser registerUser, RegisterCallBack registerCallBack) {
+    public void getData(RegisterUser registerUser, RegisterCallBack registerCallBack) {
         Retrofit retrofit = RetrofitClient.getInstance();
         UserApi api = retrofit.create(UserApi.class);
-        String content = UserData.getRegisterDate();
+        String content = "";
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("userAccount", "15928132508");
+            jsonObject.put("type", "register");
+            jsonObject.put("clientVersion", "1.1.1.6");
+            jsonObject.put("imei", "347558749E29B240957C58DAA6277D48");
+            //json串转string类型
+            content = String.valueOf(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         RequestBody requestBody = RequestBody.create(JSON, content);
         Call<ResponseBody> call = api.register(requestBody);
@@ -45,15 +59,15 @@ public class RegisterModel {
                         result = response.body().string();
                         Log.d(TAG, "result  " + result);
                         Gson gson = new Gson();
-                        ResponseData responseData = gson.fromJson(result, ResponseData.class);
-                        code = responseData.getCode();
-                        verificationCode = responseData.getContext().getVerificationCode();
-                        message = responseData.getMessage();
+                        ResponseEntente responseEntente = gson.fromJson(result, ResponseEntente.class);
+                        code = responseEntente.getCode();
+                        verificationCode = responseEntente.getContext().getVerificationCode();
+                        message = responseEntente.getMessage();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                if ("00".equals(code)) {
+                if (Constants.GET_CODE.equals(code)) {
                     String verify = verificationCode;
                     Log.d(TAG, "verify  " + verify);
                     registerCallBack.onRegisterSuccess(verify);
