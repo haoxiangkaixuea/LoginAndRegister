@@ -5,7 +5,7 @@ package cn.edu.scujcc.loginandregister.api;
  */
 public interface LoginCallBack {
     /**
-     * 登陆成功
+     * 登录成功
      *
      * @param result 返回登录成功的结果
      */
