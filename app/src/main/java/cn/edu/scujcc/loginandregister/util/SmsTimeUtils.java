@@ -49,10 +49,8 @@ public class SmsTimeUtils {
                     countdownTimer.cancel();
                     countdownTimer = null;
                 }
-//                tvSendCode.setText("获取验证码");
                 tvSendCode.setEnabled(true);
             } else {
-//                tvSendCode.setText(msg.what + "s");
                 tvSendCode.setEnabled(false);
             }
             super.handleMessage(msg);
