@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.data;
+package cn.edu.scujcc.loginandregister.entity;
 
 import androidx.annotation.NonNull;
 
@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
  *
  * @author Administrator
  */
-public class ResponseEntente {
+public class ResponseEntity {
     private String code;
     private String message;
     private Context context;

@@ -14,7 +14,7 @@ import java.io.IOException;
 import cn.edu.scujcc.loginandregister.Constants;
 import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
 import cn.edu.scujcc.loginandregister.api.UserApi;
-import cn.edu.scujcc.loginandregister.data.ResponseEntente;
+import cn.edu.scujcc.loginandregister.entity.ResponseEntity;
 import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -97,10 +97,10 @@ public class RegisterModel {
                         result = response.body().string();
                         Log.d(TAG, "result  " + result);
                         Gson gson = new Gson();
-                        ResponseEntente responseEntente = gson.fromJson(result, ResponseEntente.class);
-                        code = responseEntente.getCode();
-                        verificationCode = responseEntente.getContext().getVerificationCode();
-                        message = responseEntente.getMessage();
+                        ResponseEntity responseEntity = gson.fromJson(result, ResponseEntity.class);
+                        code = responseEntity.getCode();
+                        verificationCode = responseEntity.getContext().getVerificationCode();
+                        message = responseEntity.getMessage();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
