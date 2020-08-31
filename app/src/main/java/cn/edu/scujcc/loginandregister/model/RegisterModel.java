@@ -88,7 +88,7 @@ public class RegisterModel {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
-                String result = "";
+                String result;
                 String code = "";
                 String verificationCode = "";
                 String message = "";
@@ -106,9 +106,8 @@ public class RegisterModel {
                     }
                 }
                 if (Constants.GET_CODE.equals(code)) {
-                    String verify = verificationCode;
-                    Log.d(TAG, "verify  " + verify);
-                    registerCallBack.onRegisterSuccess(verify);
+                    Log.d(TAG, "verify  " + verificationCode);
+                    registerCallBack.onRegisterSuccess(verificationCode);
                     registerCallBack.getMessage(message);
                 } else {
                     registerCallBack.onRegisterFailure(message);

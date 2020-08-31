@@ -81,7 +81,7 @@ public class LoginModel {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {
-                String result = "";
+                String result;
                 String code = "";
                 String tokenId = "";
                 String message = "";
@@ -108,7 +108,7 @@ public class LoginModel {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 loginCallBack.networkError(t);
             }
         });
