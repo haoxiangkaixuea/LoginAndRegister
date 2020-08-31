@@ -17,20 +17,28 @@ import static android.content.ContentValues.TAG;
  * @author Administrator
  */
 public class SmsTimeUtils {
-    /*设置提现账户  标识
-      发送验证码*/
+    /**
+     * 设置提现账户  标识
+     * 发送验证码
+     */
     public final static int SETTING_FINANCE_ACCOUNT_TIME = 1;
-    public final static int REGISTER_TIME = 2;
-    public final static int FORGET_PASSWORD_TIME = 3;
     public final static int WITHDRAW_CASH = 4;
-    /*倒计时时长  单位：秒*/
+    /**
+     * 倒计时时长  单位：秒
+     */
     private final static int COUNT = 60;
-    /*当前做*/
+    /**
+     * 当前做
+     */
     private static int CURR_COUNT = 0;
-    /*设置提现账户
-      预计结束的时间*/
+    /**
+     * 设置提现账户
+     * 预计结束的时间
+     */
     private static long SETTING_FINANCE_ACCOUNT_TIME_END = 0;
-    /*提现*/
+    /**
+     * 提现
+     */
     private static long WITHDRAW_CASH_END = 0;
 
     /**
