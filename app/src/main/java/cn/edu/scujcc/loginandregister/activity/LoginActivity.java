@@ -9,10 +9,8 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,9 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gyf.immersionbar.ImmersionBar;
 
 import cn.edu.scujcc.loginandregister.R;
-import cn.edu.scujcc.loginandregister.model.LoginUser;
 import cn.edu.scujcc.loginandregister.presenter.LoginPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
+import cn.edu.scujcc.loginandregister.util.LogUtils;
 import cn.edu.scujcc.loginandregister.util.ToastUtils;
 import cn.edu.scujcc.loginandregister.view.LoginView;
 
@@ -38,11 +36,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private EditText editPassword;
     private Button btnSubmit;
     private CheckBox checkBox;
-    private ImageView imageUsername;
-    private ImageView imagePassword;
-    private ImageView imageClose;
-    private TextView tvLogin;
-    private TextView tvDeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +47,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         presenter = new LoginPresenter(this);
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
-        imageUsername = findViewById(R.id.image_username);
-        imagePassword = findViewById(R.id.image_password);
-        imageClose = findViewById(R.id.image_close);
-        tvLogin = findViewById(R.id.text_login);
+        ImageView imageUsername = findViewById(R.id.image_username);
+        ImageView imagePassword = findViewById(R.id.image_password);
+        ImageView imageClose = findViewById(R.id.image_close);
+        TextView tvLogin = findViewById(R.id.text_login);
 
         //协议设置
         setDeal();
@@ -74,9 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         //按钮背景转换事件
         setButtonChange();
 
-        imageClose.setOnClickListener(view -> {
-            finish();
-        });
+        imageClose.setOnClickListener(view -> finish());
     }
 
     private void setEditText() {
@@ -133,35 +124,27 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private void setButtonChange() {
         btnSubmit = findViewById(R.id.btn_register);
         checkBox = findViewById(R.id.cb_register);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox.isChecked()) {
-                    setEditText();
-                    boolean signUsername = editUsername.getText().length() > 0;
-                    boolean signPassword = editPassword.getText().length() > 0;
-                    if (signUsername && signPassword) {
-                        btnSubmit.setBackgroundResource(R.drawable.button_onclick);
-                        btnSubmit.setTextColor(R.drawable.button_font_style);
-                        btnSubmit.setClickable(true);
-                        btnSubmit.setOnClickListener(v -> {
-                            String name = editUsername.getText().toString().trim();
-                            String pwd = editPassword.getText().toString().trim();
-                            LoginUser loginUser = new LoginUser(name, pwd);
-                            presenter.login(loginUser);
-                        });
-                    }
-                } else {
-                    btnSubmit.setBackgroundResource(R.drawable.btn_normal);
-                    btnSubmit.setTextColor(Color.WHITE);
-                    btnSubmit.setClickable(false);
+        checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (checkBox.isChecked()) {
+                setEditText();
+                boolean signUsername = editUsername.getText().length() > 0;
+                boolean signPassword = editPassword.getText().length() > 0;
+                if (signUsername && signPassword) {
+                    btnSubmit.setBackgroundResource(R.drawable.button_onclick);
+                    btnSubmit.setTextColor(R.drawable.button_font_style);
+                    btnSubmit.setClickable(true);
+                    btnSubmit.setOnClickListener(v -> presenter.login());
                 }
+            } else {
+                btnSubmit.setBackgroundResource(R.drawable.btn_normal);
+                btnSubmit.setTextColor(Color.WHITE);
+                btnSubmit.setClickable(false);
             }
         });
     }
 
     private void setDeal() {
-        tvDeal = findViewById(R.id.deal_after);
+        TextView tvDeal = findViewById(R.id.deal_after);
         SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -177,7 +160,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void loginFailure(String msg) {
-        Log.d(TAG, "msg" + msg);
+        LogUtils.d(TAG, "msg" + msg);
         ToastUtils.shortToast(LoginActivity.this, getResources().getString(R.string.login_failure) + msg);
     }
 

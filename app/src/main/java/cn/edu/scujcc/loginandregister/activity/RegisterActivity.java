@@ -18,17 +18,17 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyf.immersionbar.ImmersionBar;
 
 import cn.edu.scujcc.loginandregister.R;
-import cn.edu.scujcc.loginandregister.model.RegisterUser;
+import cn.edu.scujcc.loginandregister.constant.Constants;
 import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
@@ -40,19 +40,13 @@ import cn.edu.scujcc.loginandregister.view.RegisterView;
  */
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
     private static final int TELL_MAX = 11;
-    private static final String TAG = "RegisterActivity";
     private final SpannableStringBuilder style = new SpannableStringBuilder();
     RegisterPresenter presenter;
     private EditText editTellPhone;
     private EditText editVerify;
     private Button btnNext;
     private CheckBox checkBox;
-    private ImageView imageTellPhone;
-    private ImageView imageVerify;
-    private ImageView imageBack;
     private TextView tvGetVerity;
-    private TextView tvGoLogin;
-    private TextView tvDealFront;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +60,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         editVerify = findViewById(R.id.edit_verify);
         btnNext = findViewById(R.id.btn_login);
         checkBox = findViewById(R.id.cb_login);
-        imageTellPhone = findViewById(R.id.image_tellPhone);
-        imageVerify = findViewById(R.id.image_verify);
-        imageBack = findViewById(R.id.image_back);
+        ImageView imageTellPhone = findViewById(R.id.image_tellPhone);
+        ImageView imageVerify = findViewById(R.id.image_verify);
+        ImageView imageBack = findViewById(R.id.image_back);
 
         //设置协议
         setDealFront();
@@ -102,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         editVerify.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (editTellPhone.getText().length() < 11) {
+                if (editTellPhone.getText().length() < Constants.VERITY_LENGTH) {
                     ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.tell_true));
                 }
             }
@@ -123,10 +117,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         tvGetVerity.setOnClickListener(view -> {
             boolean tellPhone = editTellPhone.getText().length() == TELL_MAX;
             if (tellPhone) {
-                String tell = editTellPhone.getText().toString().trim();
-                String verify = editVerify.getText().toString().trim();
-                RegisterUser registerUser = new RegisterUser(tell, verify);
-                presenter.register(registerUser);
+                presenter.register();
                 ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.have_sent_msg));
                 CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
                 mCountDownTimerUtils.start();
@@ -213,36 +204,31 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     }
 
     private void setRegisterButtonChange() {
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox.isChecked()) {
-                    setEditText();
-                    boolean signUsername = editTellPhone.getText().length() > 0;
-                    boolean signPassword = editVerify.getText().length() > 0;
-                    if (signUsername && signPassword) {
-                        btnNext.setBackgroundResource(R.drawable.button_onclick);
-                        btnNext.setTextColor(R.drawable.button_font_style);
-                        btnNext.setClickable(true);
-                        btnNext.setOnClickListener(v -> {
-                            ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.register_success));
-                        });
-                    }
-                } else {
-                    btnNext.setBackgroundResource(R.drawable.btn_normal);
-                    btnNext.setTextColor(Color.WHITE);
-                    btnNext.setClickable(false);
+        checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (checkBox.isChecked()) {
+                setEditText();
+                boolean signUsername = editTellPhone.getText().length() > 0;
+                boolean signPassword = editVerify.getText().length() > 0;
+                if (signUsername && signPassword) {
+                    btnNext.setBackgroundResource(R.drawable.button_onclick);
+                    btnNext.setTextColor(R.drawable.button_font_style);
+                    btnNext.setClickable(true);
+                    btnNext.setOnClickListener(v -> ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.register_success)));
                 }
+            } else {
+                btnNext.setBackgroundResource(R.drawable.btn_normal);
+                btnNext.setTextColor(Color.WHITE);
+                btnNext.setClickable(false);
             }
         });
     }
 
     private void setBottomLogin() {
-        tvGoLogin = findViewById(R.id.text_go_login);
+        TextView tvGoLogin = findViewById(R.id.text_go_login);
         style.append(getResources().getString(R.string.deal_after));
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
-            public void onClick(View widget) {
+            public void onClick(@NonNull View widget) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -253,7 +239,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     }
 
     private void setDealFront() {
-        tvDealFront = findViewById(R.id.deal_front);
+        TextView tvDealFront = findViewById(R.id.deal_front);
         SpannableString spannableString = new SpannableString(getResources().getString(R.string.deal_front));
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA1A6B3")), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#477BEF")), 9, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

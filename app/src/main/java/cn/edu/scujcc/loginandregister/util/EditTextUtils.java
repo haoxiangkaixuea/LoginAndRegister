@@ -20,12 +20,9 @@ public class EditTextUtils {
             view.setVisibility(View.VISIBLE);
         }
         //点击X时使et中的内容为空
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et.setText("");
-                et.requestFocusFromTouch();
-            }
+        view.setOnClickListener(v -> {
+            et.setText("");
+            et.requestFocusFromTouch();
         });
         //对et的输入状态进行监听
         et.addTextChangedListener(new TextWatcher() {

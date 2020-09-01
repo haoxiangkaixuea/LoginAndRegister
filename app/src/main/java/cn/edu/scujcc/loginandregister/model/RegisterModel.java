@@ -1,7 +1,5 @@
 package cn.edu.scujcc.loginandregister.model;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
@@ -11,11 +9,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import cn.edu.scujcc.loginandregister.Constants;
 import cn.edu.scujcc.loginandregister.api.RegisterCallBack;
-import cn.edu.scujcc.loginandregister.api.UserApi;
+import cn.edu.scujcc.loginandregister.api.UserServiceApi;
+import cn.edu.scujcc.loginandregister.constant.Constants;
 import cn.edu.scujcc.loginandregister.entity.ResponseEntity;
-import cn.edu.scujcc.loginandregister.presenter.RetrofitClient;
+import cn.edu.scujcc.loginandregister.http.RetrofitClient;
+import cn.edu.scujcc.loginandregister.util.LogUtils;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -49,9 +48,9 @@ public class RegisterModel {
         return INSTANCE;
     }
 
-    public void getData(RegisterUser registerUser, RegisterCallBack registerCallBack) {
+    public void getData(RegisterCallBack registerCallBack) {
         Retrofit retrofit = RetrofitClient.getInstance();
-        UserApi api = retrofit.create(UserApi.class);
+        UserServiceApi api = retrofit.create(UserServiceApi.class);
         String content = "";
         try {
             JSONObject jsonObject = new JSONObject();
@@ -95,7 +94,7 @@ public class RegisterModel {
                 if (response.body() != null) {
                     try {
                         result = response.body().string();
-                        Log.d(TAG, "result  " + result);
+                        LogUtils.d(TAG, "result" + result);
                         Gson gson = new Gson();
                         ResponseEntity responseEntity = gson.fromJson(result, ResponseEntity.class);
                         code = responseEntity.getCode();
@@ -106,7 +105,7 @@ public class RegisterModel {
                     }
                 }
                 if (Constants.GET_CODE.equals(code)) {
-                    Log.d(TAG, "verify  " + verificationCode);
+                    LogUtils.d(TAG, "verificationCode" + verificationCode);
                     registerCallBack.onRegisterSuccess(verificationCode);
                     registerCallBack.getMessage(message);
                 } else {

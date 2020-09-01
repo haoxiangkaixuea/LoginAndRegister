@@ -1,10 +1,8 @@
 package cn.edu.scujcc.loginandregister.presenter;
 
-import android.util.Log;
-
 import cn.edu.scujcc.loginandregister.api.LoginCallBack;
 import cn.edu.scujcc.loginandregister.model.LoginModel;
-import cn.edu.scujcc.loginandregister.model.LoginUser;
+import cn.edu.scujcc.loginandregister.util.LogUtils;
 import cn.edu.scujcc.loginandregister.view.LoginView;
 
 /**
@@ -22,19 +20,20 @@ public class LoginPresenter {
         this.loginView = view;
     }
 
-    public void login(LoginUser loginUser) {
+    public void login() {
 
-        loginModel.getData(loginUser, new LoginCallBack() {
+        loginModel.getData(new LoginCallBack() {
             @Override
             public void onLoginSuccess(String result) {
-                Log.d(TAG, "result" + result);
+                LogUtils.d(TAG, "result" + result);
+                LogUtils.d(TAG, "result" + result);
                 loginView.loginSuccess(result);
             }
 
             @Override
             public void onLoginFailure(String msg) {
                 loginView.loginFailure(msg);
-                Log.d(TAG, "msg" + msg);
+                LogUtils.d(TAG, "msg" + msg);
             }
 
             @Override
@@ -45,7 +44,7 @@ public class LoginPresenter {
             @Override
             public void getMessage(String message) {
                 loginView.getMessage(message);
-                Log.d(TAG, "message" + message);
+                LogUtils.d(TAG, "message" + message);
             }
         });
     }

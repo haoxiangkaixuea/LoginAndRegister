@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.presenter;
+package cn.edu.scujcc.loginandregister.http;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

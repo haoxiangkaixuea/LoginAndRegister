@@ -3,7 +3,6 @@ package cn.edu.scujcc.loginandregister.util;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -71,9 +70,8 @@ public class SmsTimeUtils {
      *
      * @param type  1，设置提现账户 2，注册3，忘记密码
      * @param first true 表示第一次   false不是
-     * @return 是否需要调用startCountdown(TextView textView)，主要用于判断在重新打开页，需不需要继续倒计时
      */
-    public static boolean check(int type, boolean first) {
+    public static void check(int type, boolean first) {
         long data = System.currentTimeMillis();
         long time = 0;
         switch (type) {
@@ -100,12 +98,10 @@ public class SmsTimeUtils {
                     default:
                 }
             }
-            return false;
         } else {
-            int the_difference = ((int) (time - data)) / 1000;
-            CURR_COUNT = the_difference;
-            Log.d(TAG, "the_difference-----" + the_difference);
-            return true;
+            int teleconference = ((int) (time - data)) / 1000;
+            CURR_COUNT = teleconference;
+            LogUtils.d(TAG, "the_difference-----" + teleconference);
         }
     }
 

@@ -11,6 +11,8 @@ import android.util.AttributeSet;
  * @author Administrator
  */
 public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText {
+    public static final int LENGTH = 3;
+
     public MobileEditText(Context context) {
         super(context);
         this.addTextChangedListener(new MobileWatcher());
@@ -33,7 +35,6 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
         boolean isChanged = false;
         int location = 0;// 记录光标的位置
         int keggedNumberB = 0;
-        private char[] tempChar;
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -53,7 +54,7 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             onTextLength = s.length();
             buffer.append(s.toString());
-            if (onTextLength == beforeTextLength || onTextLength <= 3 || isChanged) {
+            if (onTextLength == beforeTextLength || onTextLength <= LENGTH || isChanged) {
                 isChanged = false;
                 return;
             }
@@ -84,7 +85,7 @@ public class MobileEditText extends androidx.appcompat.widget.AppCompatEditText 
                 if (keggedNumberC > keggedNumberB) {
                     location += (keggedNumberC - keggedNumberB);
                 }
-                tempChar = new char[buffer.length()];
+                char[] tempChar = new char[buffer.length()];
                 buffer.getChars(0, buffer.length(), tempChar, 0);
                 String str = buffer.toString();
                 if (location > str.length()) {
