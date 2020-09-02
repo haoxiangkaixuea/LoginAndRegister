@@ -31,7 +31,7 @@ import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.constant.Constants;
 import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
-import cn.edu.scujcc.loginandregister.util.SmsTimeUtils;
+import cn.edu.scujcc.loginandregister.util.TimeUtils;
 import cn.edu.scujcc.loginandregister.util.ToastUtils;
 import cn.edu.scujcc.loginandregister.view.RegisterView;
 
@@ -119,8 +119,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             if (tellPhone) {
                 presenter.register();
                 ToastUtils.shortToast(RegisterActivity.this, getResources().getString(R.string.have_sent_msg));
-                CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tvGetVerity, 60000, 1000);
-                mCountDownTimerUtils.start();
+                new Time(60000, 1000).start();
             }
         });
     }
@@ -280,30 +279,31 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     /**
      * 获取验证码倒计时
      */
-    public class CountDownTimerUtils extends CountDownTimer {
-        private TextView mTextView;
+    public class Time extends CountDownTimer {
 
-        public CountDownTimerUtils(TextView textView, long millisInFuture, long countDownInterval) {
+        /**
+         * @param millisInFuture    The number of millis in the future from the call
+         *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
+         *                          is called.
+         * @param countDownInterval The interval along the way to receive
+         *                          {@link #onTick(long)} callbacks.
+         */
+        public Time(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
-            this.mTextView = textView;
         }
 
         @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
-            mTextView.setClickable(false);
-            //设置倒计时时间
-            mTextView.setText(millisUntilFinished / 1000 + getResources().getString(R.string.again_send));
-            mTextView.setTextColor(Color.parseColor("#FFA1A6B3"));
-            SmsTimeUtils.check(SmsTimeUtils.SETTING_FINANCE_ACCOUNT_TIME, false);
-            SmsTimeUtils.startCountdown(tvGetVerity);
+            tvGetVerity.setText(TimeUtils.currentlyTime(millisUntilFinished) + getResources().getString(R.string.again_send));
+            tvGetVerity.setTextColor(Color.parseColor("#FFA1A6B3"));
         }
 
         @Override
         public void onFinish() {
-            mTextView.setText(getResources().getString(R.string.get_verify));
-            mTextView.setClickable(true);
-            mTextView.setTextColor(Color.parseColor("#FF477BEF"));
+            tvGetVerity.setText(getResources().getString(R.string.get_verify));
+            tvGetVerity.setClickable(true);
+            tvGetVerity.setTextColor(Color.parseColor("#FF477BEF"));
         }
     }
 }
