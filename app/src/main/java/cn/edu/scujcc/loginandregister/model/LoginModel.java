@@ -67,16 +67,9 @@ public class LoginModel {
             e.printStackTrace();
         }
 
-        String header = "";
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("imei", "347558749E29B240957C58DAA6277D48");
-            header = String.valueOf(jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        String imei = "347558749E29B240957C58DAA6277D48";
         RequestBody requestBody = RequestBody.create(JSON, content);
-        Call<ResponseBody> call = api.login(requestBody, header);
+        Call<ResponseBody> call = api.login(requestBody, imei);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull retrofit2.Response<ResponseBody> response) {

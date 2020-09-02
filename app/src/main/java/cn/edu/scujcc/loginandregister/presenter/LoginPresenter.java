@@ -26,7 +26,6 @@ public class LoginPresenter {
             @Override
             public void onLoginSuccess(String result) {
                 LogUtils.d(TAG, "result" + result);
-                LogUtils.d(TAG, "result" + result);
                 loginView.loginSuccess(result);
             }
 

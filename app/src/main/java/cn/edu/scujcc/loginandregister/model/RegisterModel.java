@@ -63,25 +63,9 @@ public class RegisterModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String imei = "";
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("imei", "347558749E29B240957C58DAA6277D48");
-            //json串转string类型
-            imei = String.valueOf(jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        String appversion = "";
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("appversion", "1.1.1.6");
-            //json串转string类型
-            appversion = String.valueOf(jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        String imei = "347558749E29B240957C58DAA6277D48";
+        String appversion = "1.1.1.6";
         RequestBody requestBody = RequestBody.create(JSON, content);
         Call<ResponseBody> call = api.register(requestBody, imei, appversion);
         call.enqueue(new Callback<ResponseBody>() {
