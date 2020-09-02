@@ -1,6 +1,6 @@
 package cn.edu.scujcc.loginandregister.presenter;
 
-import cn.edu.scujcc.loginandregister.api.LoginCallBack;
+import cn.edu.scujcc.loginandregister.interfaces.LoginCallBack;
 import cn.edu.scujcc.loginandregister.model.LoginModel;
 import cn.edu.scujcc.loginandregister.util.LogUtils;
 import cn.edu.scujcc.loginandregister.view.LoginView;

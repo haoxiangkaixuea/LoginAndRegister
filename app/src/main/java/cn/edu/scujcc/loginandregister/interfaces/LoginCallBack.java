@@ -1,4 +1,4 @@
-package cn.edu.scujcc.loginandregister.api;
+package cn.edu.scujcc.loginandregister.interfaces;
 
 /**
  * @author Administrator

@@ -9,11 +9,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import cn.edu.scujcc.loginandregister.api.LoginCallBack;
 import cn.edu.scujcc.loginandregister.api.UserServiceApi;
 import cn.edu.scujcc.loginandregister.constant.Constants;
 import cn.edu.scujcc.loginandregister.entity.ResponseEntity;
-import cn.edu.scujcc.loginandregister.http.RetrofitClient;
+import cn.edu.scujcc.loginandregister.httpservice.RetrofitClient;
+import cn.edu.scujcc.loginandregister.interfaces.LoginCallBack;
 import cn.edu.scujcc.loginandregister.util.LogUtils;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
