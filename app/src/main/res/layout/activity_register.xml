@@ -14,7 +14,6 @@
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:padding="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/comp_nav_back" />
@@ -24,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="46dp"
         android:text="@string/login_fast"
         android:textColor="#FF293040"
         android:textSize="28sp"
@@ -47,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,18 +56,28 @@
         <EditText
             android:id="@+id/edit_tellPhone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_margin="0dp"
             android:background="@drawable/line_et_bg"
-            android:hint="@string/input_telephone"
             android:imeOptions="actionNext"
             android:inputType="phone"
             android:maxLength="11"
             android:paddingTop="0dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="13dp"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tellPhone_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="14dp"
+            android:text="@string/input_telephone"
+            android:textColor="#FFA1A6B3"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edit_username"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -86,7 +95,7 @@
             android:id="@+id/get_verify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:paddingBottom="14dp"
             android:text="@string/get_verify"
             android:textColor="@color/colorGray"
             android:textSize="16sp"
@@ -111,18 +120,29 @@
         <EditText
             android:id="@+id/edit_verify"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_margin="0dp"
             android:background="@drawable/line_et_bg"
-            android:hint="@string/input_verify"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:maxLength="6"
             android:paddingTop="0dp"
-            android:paddingBottom="24dp"
+            android:paddingBottom="13dp"
             android:textCursorDrawable="@drawable/bg_cursor"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/verify_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="14dp"
+            android:text="@string/input_verify"
+            android:textColor="#FFA1A6B3"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edit_username"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -141,7 +161,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,7 +175,7 @@
 
             <CheckBox
                 android:id="@+id/cb_login"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:button="@drawable/checkbox_img"
@@ -167,7 +187,6 @@
                 android:id="@+id/deal_front"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:focusable="false"
                 android:padding="0dp"
                 android:text="@string/deal_front"

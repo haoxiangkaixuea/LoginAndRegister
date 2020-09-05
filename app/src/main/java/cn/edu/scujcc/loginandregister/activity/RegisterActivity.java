@@ -16,6 +16,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.constant.Constants;
 import cn.edu.scujcc.loginandregister.presenter.RegisterPresenter;
+import cn.edu.scujcc.loginandregister.util.EditTextHintUtils;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.TimeUtils;
 import cn.edu.scujcc.loginandregister.util.ToastUtils;
@@ -51,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
 
         ImmersionBar.with(this).statusBarDarkFont(true).init();
@@ -60,6 +63,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         editVerify = findViewById(R.id.edit_verify);
         btnNext = findViewById(R.id.btn_login);
         checkBox = findViewById(R.id.cb_login);
+        TextView tvTellPhoneHint = findViewById(R.id.tellPhone_hint);
+        TextView tvVerifyHint = findViewById(R.id.verify_hint);
         ImageView imageTellPhone = findViewById(R.id.image_tellPhone);
         ImageView imageVerify = findViewById(R.id.image_verify);
         ImageView imageBack = findViewById(R.id.image_back);
@@ -78,7 +83,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         //输入框的清除按钮事件
         EditTextUtils.clearButtonListener(editTellPhone, imageTellPhone);
         EditTextUtils.clearButtonListener(editVerify, imageVerify);
-
+        //设置输入框hint文字
+        EditTextHintUtils.textHintListener(editTellPhone, tvTellPhoneHint);
+        EditTextHintUtils.textHintListener(editVerify, tvVerifyHint);
         //按钮背景转换事件
         setRegisterButtonChange();
 

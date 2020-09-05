@@ -8,11 +8,12 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.LoginActivity">
 
-    <TextView
-        android:id="@+id/text_login"
-        android:layout_width="32dp"
-        android:layout_height="22dp"
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="44dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/colorWhite"
         android:text="@string/text_login"
         android:textColor="#FF477BEF"
         android:textSize="16sp"
@@ -35,19 +36,27 @@
         <EditText
             android:id="@+id/edit_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
+            android:layout_height="44dp"
             android:background="@drawable/line_et_bg"
-            android:hint="@string/input_telephone"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLength="20"
-            android:paddingTop="0dp"
-            android:paddingBottom="18dp"
+            android:paddingBottom="13dp"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/username_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="14dp"
+            android:text="@string/input_tell"
+            android:textColor="#FFA1A6B3"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edit_username"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -55,9 +64,10 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_edittext_clean" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,18 +86,27 @@
         <EditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_margin="0dp"
             android:background="@drawable/line_et_bg"
-            android:hint="@string/input_password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:maxLength="20"
-            android:paddingTop="0dp"
-            android:paddingBottom="18dp"
+            android:paddingBottom="13dp"
             android:textCursorDrawable="@drawable/bg_cursor"
-            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/password_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="14dp"
+            android:text="@string/input_password"
+            android:textColor="#FFA1A6B3"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edit_password"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -95,7 +114,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginBottom="27dp"
+            android:layout_marginBottom="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_edittext_clean" />
@@ -120,11 +139,10 @@
 
             <CheckBox
                 android:id="@+id/cb_register"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:button="@drawable/checkbox_img"
-                android:padding="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,9 +150,8 @@
                 android:id="@+id/deal_after"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:focusable="false"
-                android:padding="0dp"
+                android:paddingTop="0dp"
                 android:text="@string/deal_front"
                 android:textColor="#FFA1A6B3"
                 android:textSize="12sp" />

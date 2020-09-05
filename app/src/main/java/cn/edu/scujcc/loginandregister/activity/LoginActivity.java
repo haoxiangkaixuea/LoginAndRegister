@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import cn.edu.scujcc.loginandregister.R;
 import cn.edu.scujcc.loginandregister.presenter.LoginPresenter;
+import cn.edu.scujcc.loginandregister.util.EditTextHintUtils;
 import cn.edu.scujcc.loginandregister.util.EditTextUtils;
 import cn.edu.scujcc.loginandregister.util.LogUtils;
 import cn.edu.scujcc.loginandregister.util.ToastUtils;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_login);
 
         //导航栏与状态栏设置
@@ -47,12 +50,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         presenter = new LoginPresenter(this);
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
+        TextView tvUsernameHint = findViewById(R.id.username_hint);
+        TextView tvPasswordHint = findViewById(R.id.password_hint);
         ImageView imageUsername = findViewById(R.id.image_username);
         ImageView imagePassword = findViewById(R.id.image_password);
         ImageView imageClose = findViewById(R.id.image_close);
-        TextView tvLogin = findViewById(R.id.text_login);
+        Button tvLogin = findViewById(R.id.btn_login);
 
-        //协议设置
         setDeal();
 
         tvLogin.setOnClickListener(v -> {
@@ -66,6 +70,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         //按钮背景转换事件
         setButtonChange();
+        //设置输入框hint文字
+        EditTextHintUtils.textHintListener(editUsername, tvUsernameHint);
+        EditTextHintUtils.textHintListener(editPassword, tvPasswordHint);
 
         imageClose.setOnClickListener(view -> finish());
     }
