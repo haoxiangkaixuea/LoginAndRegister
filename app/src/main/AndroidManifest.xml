@@ -14,22 +14,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MainStyle">
-        <activity android:name=".activity.MainActivity" />
-        <meta-data
-            android:name="android.notch_support"
-            android:value="true" />
-
         <activity
-            android:name=".activity.LoginActivity"
-            android:launchMode="singleTask">
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
         <activity
             android:name=".activity.RegisterActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>
